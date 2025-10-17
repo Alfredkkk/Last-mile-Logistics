@@ -6,7 +6,7 @@ The project is in the `test_ppo.ipynb` file.
 
 This project is based on paper https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4565248.
 
-The readme file may not be up-to-date.
+The readme file may not be up-to-date. If you observe some rendering issues of the Readme file on the Github page, cloning this repo to your local device should fix them.
 
 ## Quick Start
 
@@ -70,7 +70,7 @@ An episode ends when **either**:
 ## Observation & Action
 
 ### Observation vector (normalized, flattened)
-- Core: $[x/R,\, y/R,\, \text{time\_frac}=t/\text{HORIZON\_MIN},\, \mathbf{1}_{\text{to\_pickup}},\, \mathbf{1}_{\text{with\_pass}},\, \text{pkg\_count\_norm},\, \text{visible\_norm}]$.
+- Core: $$[x/R,\, y/R,\, \text{time\_frac}=t/\text{HORIZON\_MIN},\, \mathbf{1}_{\text{to\_pickup}},\, \mathbf{1}_{\text{with\_pass}},\, \text{pkg\_count\_norm},\, \text{visible\_norm}]$$.
 - Nearest `K_NEAREST_PACK` packages: for each $(\Delta x/R,\,\Delta y/R,\, d_1/R)$.
 - Up to `MAX_VISIBLE_RIDES` rides: for each $(\Delta x_{\text{pick}}/R,\,\Delta y_{\text{pick}}/R,\, d_{1,\text{pick}}/R,\,\Delta x_{\text{drop}}/R,\,\Delta y_{\text{drop}}/R,\, \text{trip\_len}/R)$.
 - Zero-padded when fewer items exist.
