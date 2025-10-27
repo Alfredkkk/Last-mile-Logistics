@@ -1,6 +1,6 @@
 # DRL for Joint Ride-Hailing & Package Delivery
 
-This project simulates a **single vehicle** operating in a diamond-shaped city (L1 metric) that must decide, at each step, whether to **deliver packages** or **accept a passenger ride**. Passenger requests arrive as a **spatially homogeneous Poisson process**; packages are drawn from a **spatial Poisson field**. We compare a **Deep RL (PPO)** policy against a **switching heuristic** (paper’s $N=n$ case) and a **pure delivery** baseline.
+This project simulates a **single vehicle** operating in a diamond-shaped city (L1 metric) that must decide, at each step, whether to **deliver packages** or **accept a passenger ride**. Passenger requests arrive as a **spatially homogeneous Poisson process**; packages are drawn from a **spatial Poisson field**. We compare a **Deep RL (PPO)** policy against a **switching heuristic** (paper’s $N=n$ case) and **pure delivery** and **greedy heuristics** baseline.
 
 The project is in the `test_ppo.ipynb` file.
 
