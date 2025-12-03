@@ -2,7 +2,9 @@
 
 This project simulates a **single vehicle** operating in a diamond-shaped city (L1 metric) that must decide, at each step, whether to **deliver packages** or **accept a passenger ride**. Passenger requests arrive as a **spatially homogeneous Poisson process**; packages are drawn from a **spatial Poisson field**. We compare a **Deep RL (PPO)** policy against a **switching heuristic** (paper’s $N=n$ case), a **pure delivery** and a **heuristic zoning policy** baseline.
 
-The project is in the `test_ppo.ipynb` file.
+The project and part of the analysis is in the `experiment.ipynb` file.
+
+Formal analysis in `analysis.ipynb` file.
 
 This project is based on paper https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4565248.
 
@@ -127,8 +129,10 @@ If `REPORT_UNSCALED=True`, all printed **reward** and **rate = reward / terminal
 
 ## Key Parameters (defaults)
 
+The core of this experiement is in parameter sweep part. These parameters here are just for default use.
+
 **Geometry & time**
-- `R = 20.0` (L1 radius), `V = 1.0` (distance/min), `DT = 0.5` (min/step), `HORIZON_MIN = 1440.0`.
+- `R = 5.5` (L1 radius), `V = 1.0` (distance/min), `DT = 0.5` (min/step), `HORIZON_MIN = 1440.0`.
 
 **Demand & revenue**
 - `LAMBDA = 0.60` (rides per minute), `GAMMA_PACK = 0.8` (packages per area),
