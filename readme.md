@@ -6,6 +6,8 @@ The project is in the `test_ppo.ipynb` file.
 
 This project is based on paper https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4565248.
 
+For non-stationary scenario, the data we prepare to use is https://www.kaggle.com/datasets/shuhengmo/uber-nyc-forhire-vehicles-trip-data-2021
+
 The readme file may not be up-to-date. If you observe some rendering issues of the Readme file on the Github page, cloning this repo to your local device should fix them.
 
 ## Quick Start
