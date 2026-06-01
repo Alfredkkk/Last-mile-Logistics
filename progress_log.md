@@ -250,3 +250,11 @@ This file records code changes, experiment adjustments, and analysis updates for
 - Marked issue 28 as deferred by user decision.
 - Preferred future fix, if needed: replace x-first/y-first `step_towards()` movement with L1 geodesic interpolation along the segment from current position to target.
 - Rationale: the diamond feasible region is convex, so interpolating between two feasible endpoints stays inside `|x| + |y| <= R`; the interpolation also preserves L1 step length as `min(max_dist, manhattan(from_pt, to_pt))`.
+
+### 13. Training Log Path Cleanup
+
+- Archived legacy training-log CSVs under `archive/training_logs/` instead of keeping them in active result directories.
+- Updated `analysis.ipynb` to read `Results/training_log.csv` directly for convergence plots.
+- Updated `NonStationary/analysis2.ipynb` to read `NonStationary/Results/training_log.csv` directly through `ns_results_path()`.
+- Removed the current analysis dependency on `training_log_clean.csv`; clean files are now treated only as archived legacy recovery artifacts.
+- Converted the convergence-cell comments and error messages to English.

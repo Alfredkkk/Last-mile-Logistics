@@ -25,6 +25,7 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 - For issues 25-26, align README and notebook comments with the active `run_param_sweep()` workflow and the code geometry convention `area = 2 * R^2`.
 - For issue 27, keep the legacy baseline parameters but explicitly document that they are not active in the current switching heuristic.
 - Treat issue 28 as deferred: keep the current movement implementation for now, but retain L1 geodesic interpolation as the preferred future fix if boundary projection becomes material.
+- Current training-log pipeline uses fresh fixed-schema `training_log.csv` files directly. Legacy training logs were archived under `archive/training_logs/`.
 
 ### First-Round Scope
 
