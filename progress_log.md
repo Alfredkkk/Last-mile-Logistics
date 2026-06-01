@@ -153,3 +153,93 @@ This file records code changes, experiment adjustments, and analysis updates for
 - Revisit the ratio plots after filtering out `lambda = 2` if the final paper figure should start at `lambda = 5`.
 - Consider making `Results/training_log_clean.csv` generation a reusable helper function rather than cell-local preprocessing.
 
+## 2026-06-01 Debug Pass: Notebook Logic and Analysis Cleanup
+
+### 1. Debug Tracking
+
+- Created `debug_log.md` as the dedicated debug record for the project.
+- Recorded 28 reviewed issues with status labels, including code-level bugs, modeling deviations, analysis inconsistencies, and documentation cleanup items.
+- Agreed to keep `debug_log.md` and `progress_log.md` synchronized for subsequent debug passes.
+
+### 2. First-Round Experiment Notebook Fixes
+
+- Updated both `experiment.ipynb` and `NonStationary/experiment2.ipynb`.
+- Disabled the stale `main()` training entry because the active training path is now `train_policy_brief()` / `run_param_sweep()`.
+- Fixed `HEUR_VOR` ride selection so the filtered Voronoi candidate keeps its original visible-ride action index.
+- Fixed `FOUR_ZONE` so it actually follows the planned zone route rather than falling back to global nearest-package delivery.
+- Moved new ride arrivals to the end of `step()` so action indices correspond to the ride set shown in the previous observation/mask.
+- Removed PPO dropout from `ActorCritic` to keep PPO old/current log-probability comparisons deterministic under unchanged parameters.
+- Added environment seed support so seeded rollout behavior is reproducible.
+
+### 2.1 Issue 1-7 Status Mapping
+
+- Issue 1 (`main()` stale training entry): fixed by disabling the obsolete `main()` cell and directing users to `train_policy_brief()` / `run_param_sweep()`.
+- Issue 2 (`analysis.ipynb` `paper_axes()` pollution): fixed by removing the stray CSV-reading block from `paper_axes(ax)`.
+- Issue 3 (`HEUR_VOR` filtered ride index): fixed by preserving the original `visible` ride index when converting a Voronoi-filtered candidate into an action.
+- Issue 4 (`FOUR_ZONE` route ignored): fixed by temporarily overriding `env._nearest_package()` inside `baseline_four_zone()` so package delivery follows the planned zone route.
+- Issue 5 (action/mask ride-set mismatch): fixed by resolving the current action before appending newly sampled ride requests.
+- Issue 6 (PPO dropout instability): fixed by removing dropout layers from `ActorCritic`.
+- Issue 7 (training rollout RNG reproducibility): fixed by adding optional `seed` support to `CoModalEnv`, deriving default environment seeds from the global seeded RNG, and seeding sweep environments.
+
+### 3. Analysis Notebook Fix
+
+- Fixed `analysis.ipynb` by removing stray CSV-reading code accidentally embedded inside `paper_axes(ax)`.
+- Verified `paper_axes(ax)` can now be called without the previous `NameError`.
+
+### 4. Modeling Decisions for Issues 8-12
+
+- Confirmed the project will keep the code geometry convention: feasible region `|x| + |y| <= R` and area `2 * R^2`.
+- Deferred README/comment updates that still refer to the paper's `R^2` area convention.
+- Confirmed the pre-grace switching heuristic is intentional and should be documented as a modified switching heuristic, not treated as a bug.
+- Marked the current-location ride visibility rule as unresolved pending advisor discussion.
+- Decided not to constrain the experiment parameter ranges to the paper's numerical figure ranges.
+
+### 5. Logging and Analysis Fixes for Issues 13-16
+
+- Updated `append_training_log()` in both experiment notebooks with a `values_are_unscaled` flag.
+- Eval rows now pass `values_are_unscaled=REPORT_UNSCALED`, preventing double descaling when `evaluate_all()` already returns unscaled metrics.
+- Added fixed `TRAIN_LOG_COLUMNS` so future train/eval rows use the same CSV schema.
+- Updated revenue-rate-vs-n cells in both analysis notebooks to filter by `RT_FILTER = 6.0` when figures are labeled with `r_l=6`.
+- Updated the `HEUR_VOR / DRL` ratio cells in both analysis notebooks so both algorithms use best-alpha rates under each `(lambda, gamma)` setting.
+
+### 6. Follow-Up Decisions for Issues 17-19
+
+- Fixed the optimal-alpha plotting helper in both experiment notebooks so only ride-aware algorithms (`DRL`, `HEUR`, `HEUR_VOR`) use best-alpha selection.
+- Pure delivery baselines (`PURE`, `PURE_OR`) are now averaged across alpha in the optimal-alpha plots because they do not use ride visibility.
+- Recorded the evaluation-size recommendation: keep `EVAL_EPISODES = 5` for quick/debug sweeps, use `20` for final full sweeps, and use `30` for smaller final confirmation runs when runtime allows.
+- Fixed issue 19 by redefining the main aggregate `avg_rate` / CSV `rate` as `sum(reward) / sum(terminal_time)`.
+- Added diagnostic `avg_ep_rate` / CSV `ep_rate`, defined as `mean(reward_i / terminal_time_i)`, and added the corresponding training-log column.
+- Updated the main analysis notebook plots to continue using CSV `rate` as the primary metric, with inline comments documenting that `ep_rate` is diagnostic only.
+
+### 7. Non-Stationary Path Fixes for Issues 20-21
+
+- Added project-root and non-stationary path helpers to `NonStationary/experiment2.ipynb`.
+- Removed the hard-coded local Uber NYC absolute path. The notebook now resolves Uber parquet data from `UBER_PARQUET_DIR`, a sibling `Uber_NYC` directory next to the project root, `Last-mile Logistics/Uber_NYC`, or `NonStationary/Uber_NYC`.
+- Moved the hourly alpha cache to `NonStationary/Results/hourly_alpha_2021.csv`, so fitting can cache inside the project instead of writing into the external data directory.
+- Routed non-stationary training logs, sweep CSVs, and plot outputs in `experiment2.ipynb` through `ns_results_path()` or `ns_path()`.
+- Added the same project-root helpers to `NonStationary/analysis2.ipynb`, so `CSV_PATH`, cleaned training logs, and non-stationary analysis figures resolve to `NonStationary/Results` or `NonStationary` even when the notebook is run from the project root.
+
+### 8. Non-Stationary Observation Fix for Issue 22
+
+- Added cyclic hour-of-day features to the non-stationary environment observation in `NonStationary/experiment2.ipynb`.
+- The observation core now keeps `time_frac` and additionally includes `hour_sin = sin(2*pi*(t mod 1440)/1440)` and `hour_cos = cos(2*pi*(t mod 1440)/1440)`.
+- Increased `CoModalEnv.obs_dim` by 2 so the PPO policy input dimension matches the expanded observation vector.
+
+### 9. Deferred Non-Stationary Start-Time Issue 23
+
+- Marked issue 23 as deferred by user decision.
+- Current non-stationary episodes still start at `t = 0`; randomizing or sweeping episode start time is treated as a future robustness/design extension, not a current debug blocker.
+
+### 10. Deferred Uber Spatial Filtering Issue 24
+
+- Marked issue 24 as deferred by user decision.
+- The project keeps the paper-style abstract diamond service region rather than mapping NYC geography into the simulation.
+- The Uber NYC data is currently used only to calibrate a city-wide hour-of-day demand profile for non-stationary arrivals.
+
+### 11. README and Comment Cleanup for Issues 25-27
+
+- Rewrote README Quick Start to use the active `run_param_sweep()` workflow instead of the disabled `main()` entry.
+- Updated README defaults to match the current experiment notebooks: `V = 0.19`, `HORIZON_MIN = 5760.0`, `GAMMA_PACK = 0.075`, `RT = 5.5`, `RP = 2.0`, and `PPO_STEPS = 8192`.
+- Aligned README geometry text with the code convention: feasible region `|x| + |y| <= R` and package sampling area `2 * R^2`.
+- Updated environment comments in both experiment notebooks from `Poisson(gamma * R^2)` to `Poisson(gamma * 2R^2)`.
+- Added an inline comment to `baseline_nearby_rule()` in both experiment notebooks noting that `pickup_alpha` and `drop_bias` are legacy parameters and are not used by the current switching heuristic.

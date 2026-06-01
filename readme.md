@@ -10,37 +10,46 @@ This project is based on paper https://papers.ssrn.com/sol3/papers.cfm?abstract_
 
 For non-stationary scenario, the data we prepare to use is https://www.kaggle.com/datasets/shuhengmo/uber-nyc-forhire-vehicles-trip-data-2021
 
-The readme file may not be up-to-date. If you observe some rendering issues of the Readme file on the Github page, cloning this repo to your local device should fix them.
+This README reflects the current notebook entry points and metric definitions used in the debug pass.
 
 ## Quick Start
 
-Train & evaluate a single setting (inside a notebook/script):
+`main()` is intentionally disabled. The active experiment entry point is the parameter sweep cell that trains/evaluates each setting and writes the CSV used by the analysis notebooks.
+
+Stationary sweep example from `experiment.ipynb`:
 
 ```python
-# Un-comment in code if running as a script:
-# if __name__ == "__main__":
-#     main()
+LAMBDA_list            = [2, 5, 10, 20, 30, 40]
+R_PICK_ALPHA_list      = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4]
+GAMMA_PACK_list        = [0.33, 0.50, 0.67, 0.83, 1.00]
+RIDE_TTL_MINUTES_list  = [5]
+MAX_VISIBLE_RIDES_list = [5]
+SWITCH_GRACE_STEPS_list= [6]
+RT_list                = [5.5, 6.0]
 
-# Or call main() directly:
-main()
-```
-Sweep parameters and write results to CSV with plots:
-```python
+CSV_PATH = "Results/param_sweep_results_2.csv"
+
 df = run_param_sweep(
-    LAMBDA_list, R_PICK_ALPHA_list, GAMMA_PACK_list,
-    RIDE_TTL_MINUTES_list, MAX_VISIBLE_RIDES_list, SWITCH_GRACE_STEPS_list,
-    train_updates_per_combo=50,                 # PPO updates per combo (not episodes)
-    csv_path="param_sweep_results.csv",
+    LAMBDA_list,
+    R_PICK_ALPHA_list,
+    GAMMA_PACK_list,
+    RIDE_TTL_MINUTES_list,
+    MAX_VISIBLE_RIDES_list,
+    SWITCH_GRACE_STEPS_list,
+    RT_list,
+    train_updates_per_combo=50,      # Use 20-50 for short runs; 200 for full training.
+    csv_path=CSV_PATH,
     seed_offset=0
 )
+
 plot_from_csv(
-    "param_sweep_results.csv",
-    vary_keys=["LAMBDA","R_PICK_ALPHA","GAMMA_PACK","RIDE_TTL_MIN","MAX_VISIBLE_RIDES","SWITCH_GRACE_STEPS"],
+    CSV_PATH,
+    vary_keys=["LAMBDA", "GAMMA_PACK", "R_PICK_ALPHA", "RT"],
     metrics=("rate","reward","accepted")
 )
-
 ```
-Which is the last cell of this Jupyter Notebook.
+
+For the non-stationary notebook, use the analogous cell in `NonStationary/experiment2.ipynb`; it writes to `NonStationary/Results/param_sweep_results_2.csv`.
 
 ## Environment & Dynamics
 
@@ -54,8 +63,8 @@ Which is the last cell of this Jupyter Notebook.
 - **Horizon**: `HORIZON_MIN` minutes max per episode; steps per episode `STEPS_PER_EP = HORIZON_MIN / DT`.
 
 ### Stochastic primitives
-- **Packages**: on reset, sample $N\sim \text{Poisson}(\gamma R^2)$; locations IID uniform in the diamond  
-  (`GAMMA_PACK = γ` is **intensity per unit area**; diamond area under L1 is $R^2$.
+- **Packages**: on reset, sample $N\sim \text{Poisson}(\gamma \cdot 2R^2)$; locations IID uniform in the diamond.  
+  (`GAMMA_PACK = γ` is **intensity per unit area**; the L1-ball diamond area used by the code is $2R^2$.)
 - **Rides**: each step draws $\text{Poisson}(\lambda \cdot DT)$ new requests with pickup & dropoff IID uniform in the diamond (`LAMBDA = λ` per minute).
 
 ### Request visibility & TTL
@@ -75,6 +84,7 @@ An episode ends when **either**:
 
 ### Observation vector (normalized, flattened)
 - Core: $[x/R,\, y/R,\, \text{time\_frac}=t/\text{HORIZON\_MIN},\, \mathbf{1}_{\text{to\_pickup}},\, \mathbf{1}_{\text{with\_pass}},\, \text{pkg\_count\_norm},\, \text{visible\_norm}]$.
+- Non-stationary runs additionally include cyclic hour-of-day features: $\sin(2\pi h)$ and $\cos(2\pi h)$, where $h=(t\bmod 1440)/1440$.
 - Nearest `K_NEAREST_PACK` packages: for each $(\Delta x/R,\,\Delta y/R,\, d_1/R)$.
 - Up to `MAX_VISIBLE_RIDES` rides: for each $(\Delta x_{\text{pick}}/R,\,\Delta y_{\text{pick}}/R,\, d_{1,\text{pick}}/R,\,\Delta x_{\text{drop}}/R,\,\Delta y_{\text{drop}}/R,\, \text{trip\_len}/R)$.
 - Zero-padded when fewer items exist.
@@ -97,15 +107,15 @@ Rewards are per step and **internally scaled** for stabilization:
 **Scaling:** In `CoModalEnv.__init__`,  
 $$\texttt{rt}=\texttt{RT}\times \texttt{REWARD\_SCALE},\qquad
 \texttt{rp}=\texttt{RP}\times \texttt{REWARD\_SCALE}.$$
-If `REPORT_UNSCALED=True`, all printed **reward** and **rate = reward / terminal_time** are **descaled** by `INV_REWARD_SCALE` to original units.
+If `REPORT_UNSCALED=True`, all printed **reward** and rate metrics are **descaled** by `INV_REWARD_SCALE` to original units.
 
-> Units: distance is L1; `V` is distance/min; `DT` is min/step; reward is in revenue units (ride: per distance, package: per item). Printed **Rate** is per minute of actual episode time.
+> Units: distance is L1; `V` is distance/min; `DT` is min/step; reward is in revenue units (ride: per distance, package: per item). Aggregated **Rate** is per minute of actual episode time.
 
 
 ## Policies
 
 ### DRL (PPO; greedy at eval)
-- **Network**: shared MLP trunk (256 units × 2) with **LayerNorm → ReLU → Dropout(0.1)**; heads:
+- **Network**: shared MLP trunk (256 units × 2) with **LayerNorm → ReLU**; heads:
   - `pi`: logits over actions
   - `v`: scalar value
 - **Action masking** applied to logits before sampling/argmax.
@@ -132,19 +142,20 @@ If `REPORT_UNSCALED=True`, all printed **reward** and **rate = reward / terminal
 The core of this experiement is in parameter sweep part. These parameters here are just for default use.
 
 **Geometry & time**
-- `R = 5.5` (L1 radius), `V = 1.0` (distance/min), `DT = 0.5` (min/step), `HORIZON_MIN = 1440.0`.
+- `R = 5.5` (L1 radius), `V = 0.19` (distance/min), `DT = 0.5` (min/step), `HORIZON_MIN = 5760.0`.
+- Feasible region: `|x| + |y| <= R`; area used for package sampling is `2 * R^2`.
 
 **Demand & revenue**
-- `LAMBDA = 0.60` (rides per minute), `GAMMA_PACK = 0.8` (packages per area),
+- `LAMBDA = 0.60` (rides per minute), `GAMMA_PACK = 0.075` (packages per unit area),
 - `R_PICK_ALPHA = 0.5` (pickup visibility $r_{\text{pick}} = \alpha R/\sqrt 2$),
 - `RIDE_TTL_MINUTES = 5`,
-- `RT = 8.0` (ride revenue / distance), `RP = 1.0` (package revenue / item),
+- `RT = 5.5` (ride revenue / distance), `RP = 2.0` (package revenue / item),
 - `REWARD_SCALE = 1/8`, `REPORT_UNSCALED = True`.
 
 **DRL (PPO)**
 - `MAX_VISIBLE_RIDES = 5`, `K_NEAREST_PACK = 10`,
 - `DISCOUNT = 0.99`, `GAE_LAMBDA = 0.95`,
-- `PPO_STEPS = 4096`, `PPO_MINI_BATCH = 256`, `PPO_EPOCHS = 4`,
+- `PPO_STEPS = 8192`, `PPO_MINI_BATCH = 256`, `PPO_EPOCHS = 4`,
 - `CLIP_EPS = 0.2`, `VF_COEF = 0.5`, `ENT_COEF = 0.02`, `LR = 3e-4`,
 - `UPDATES = 200`.
 
@@ -159,23 +170,36 @@ Every `eval_every` updates (default **5**), we print aggregated DRL/HEUR/PURE av
 - **R** (reward), **T** (terminal time), **Rate** (reward/min), **Acc** (accepted rides; DRL only),
 - PPO diagnostics: `pi` (policy loss), `v` (value loss), `ent` (entropy).
 
+The main aggregate rate metric is `rate` / `avg_rate`:
+$$\text{avg\_rate}=\frac{\sum_i \text{reward}_i}{\sum_i \text{terminal\_time}_i}.$$
+The diagnostic metric `ep_rate` / `avg_ep_rate` is the mean of per-episode rates:
+$$\text{avg\_ep\_rate}=\frac{1}{N}\sum_i\frac{\text{reward}_i}{\text{terminal\_time}_i}.$$
+Use `rate` for primary comparisons and `ep_rate` only to diagnose episode-level variability.
+
 Per-episode breakdown (for each algorithm) includes:
-- `reward`, `terminal_time`, `rate`, `accepted`, `ended_reason`.
+- `reward`, `terminal_time`, per-episode `rate`, `accepted`, `ended_reason`.
+
+Sweep CSVs store `rate` as the primary aggregate `avg_rate` and `ep_rate` as the diagnostic mean per-episode rate.
 
 With `REPORT_UNSCALED=True`, printed **reward**/**rate** are in **original units** (descaled).
 
 
 ## Parameter Sweeps & Plots
 
-Run grid experiments and save aggregated results:
+Run grid experiments and save aggregated results with `run_param_sweep()`. The stationary notebook writes to `Results/`; the non-stationary notebook writes to `NonStationary/Results/` through its path helpers.
 
 ```python
 df = run_param_sweep(
-    LAMBDA_list, R_PICK_ALPHA_list, GAMMA_PACK_list,
-    RIDE_TTL_MINUTES_list, MAX_VISIBLE_RIDES_list, SWITCH_GRACE_STEPS_list,
-    train_updates_per_combo=50,                 # PPO updates per combo
-    csv_path="param_sweep_results.csv",
-    seed_offset=0                               # change to 1,2,... for independent repeats
+    LAMBDA_list,
+    R_PICK_ALPHA_list,
+    GAMMA_PACK_list,
+    RIDE_TTL_MINUTES_list,
+    MAX_VISIBLE_RIDES_list,
+    SWITCH_GRACE_STEPS_list,
+    RT_list,
+    train_updates_per_combo=50,
+    csv_path="Results/param_sweep_results_2.csv",
+    seed_offset=0
 )
 ```
 
@@ -192,7 +216,7 @@ df = run_param_sweep(
 
 - **Environment**: `CoModalEnv` (state, dynamics, rewards, TTL, visibility)
 - **DRL policy**: `ActorCritic`
-- **PPO**: `collect_rollout` (GAE), `ppo_update`, `main`
-- **Baselines**: `baseline_nearby_rule` (switching), `run_episode` (pure delivery when `policy=None`)
+- **PPO**: `collect_rollout` (GAE), `ppo_update`, `train_policy_brief`
+- **Baselines**: `baseline_nearby_rule` (switching), `baseline_nearby_rule_voronoi`, `baseline_four_zone`, `run_episode` (pure delivery when `policy=None`)
 - **Evaluation**: `evaluate_all`
 - **Sweeps & plots**: `run_param_sweep`, `plot_from_csv`
