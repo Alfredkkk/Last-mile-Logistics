@@ -11,7 +11,7 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 - Create a separate root-level `debug_log.md` instead of appending to `progress_log.md`.
 - Apply first-round code fixes to both `experiment.ipynb` and `NonStationary/experiment2.ipynb`.
 - Keep the current code geometry convention: diamond feasible region `|x| + |y| <= R` with area `2 * R^2`.
-- Align documentation and comments with the existing `2 * R^2` convention later.
+- Align documentation and comments with the existing `2 * R^2` convention.
 - Treat `main()` as an unused/obsolete training entry and disable it rather than maintaining it as a supported path.
 - Handle the remaining model-alignment and analysis issues in later stages.
 - Treat issue 10 as an intentional modified switching heuristic: the pre-grace window is kept because it improved training/evaluation behavior relative to the stricter paper timing.
@@ -24,6 +24,7 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 - Treat issue 24 as deferred: the simulation keeps the paper-style abstract diamond region and does not attempt to spatially map NYC geography into the model.
 - For issues 25-26, align README and notebook comments with the active `run_param_sweep()` workflow and the code geometry convention `area = 2 * R^2`.
 - For issue 27, keep the legacy baseline parameters but explicitly document that they are not active in the current switching heuristic.
+- Treat issue 28 as deferred: keep the current movement implementation for now, but retain L1 geodesic interpolation as the preferred future fix if boundary projection becomes material.
 
 ### First-Round Scope
 
@@ -46,8 +47,8 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 
 ### Paper Model and Experiment Definition
 
-8. The code uses `|x| + |y| <= R` with area `2 * R^2`, while the paper defines edge-length `R` with area `R^2`. The project will keep the current code convention and document it clearly.
-9. `readme.md` and code comments disagree about diamond area (`R^2` vs `2 * R^2`). Status: deferred documentation cleanup.
+8. The code uses `|x| + |y| <= R` with area `2 * R^2`, while the paper defines edge-length `R` with area `R^2`. Status: resolved on 2026-06-01 by keeping the code convention and documenting it as the project geometry.
+9. `readme.md` and code comments disagree about diamond area (`R^2` vs `2 * R^2`). Status: fixed on 2026-06-01 through the issue 25/26 README and notebook comment cleanup.
 10. `baseline_nearby_rule()` uses a pre-grace window that may accept a ride before actually completing the package delivery, which is more aggressive than the paper's switching description. Status: accepted intentional modeling change; keep current behavior and document as a modified/pre-grace switching heuristic.
 11. Ride visibility is computed from current vehicle position, not the final delivery location used in the paper's screening logic. Status: unresolved; defer until advisor discussion.
 12. Project sweeps use arrival-rate and TTL settings that are extensions, not a direct reproduction of the paper's Figure 7/8 calibration. Status: accepted; no action needed because the project is not constrained to the paper's plotted parameter range.
@@ -80,7 +81,7 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 25. `readme.md` defaults are stale (`V`, `HORIZON_MIN`, `RT`, `RP`, and Quick Start do not match current code). Status: fixed on 2026-06-01 by rewriting Quick Start around `run_param_sweep()`, removing `main()` usage, and updating current defaults.
 26. Environment comments still describe package count as `Poisson(gamma * R^2)` even though code uses `Poisson(gamma * 2R^2)`. Status: fixed on 2026-06-01 by aligning README and experiment notebook comments to the `2 * R^2` L1 diamond area convention.
 27. `baseline_nearby_rule()` accepts `pickup_alpha` and `drop_bias` parameters that are not used. Status: fixed on 2026-06-01 by adding an inline code comment that these are legacy parameters and the current baseline uses `env.r_pick` plus nearest-pickup selection directly.
-28. `step_towards()` always moves x-first then y and projects to the diamond if needed, which may distort the intended L1 route/reward near boundaries. Status: deferred modeling discussion.
+28. `step_towards()` always moves x-first then y and projects to the diamond if needed, which may distort the intended L1 route/reward near boundaries. Status: deferred by user decision on 2026-06-01. Preferred future option: replace x-first/y-first movement with L1 geodesic interpolation `from_pt + (max_dist / manhattan(from_pt, to_pt)) * (to_pt - from_pt)` when the target is farther than one step. Because the diamond is convex, this keeps movement inside `|x| + |y| <= R` when both endpoints are feasible and preserves the intended L1 step length.
 
 ## First-Round Verification Checklist
 

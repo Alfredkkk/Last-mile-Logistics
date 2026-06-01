@@ -241,5 +241,12 @@ This file records code changes, experiment adjustments, and analysis updates for
 - Rewrote README Quick Start to use the active `run_param_sweep()` workflow instead of the disabled `main()` entry.
 - Updated README defaults to match the current experiment notebooks: `V = 0.19`, `HORIZON_MIN = 5760.0`, `GAMMA_PACK = 0.075`, `RT = 5.5`, `RP = 2.0`, and `PPO_STEPS = 8192`.
 - Aligned README geometry text with the code convention: feasible region `|x| + |y| <= R` and package sampling area `2 * R^2`.
+- Marked issues 8 and 9 as resolved through this documentation/comment cleanup: the project keeps the code's L1 radius convention even though the paper uses a different `R` area convention.
 - Updated environment comments in both experiment notebooks from `Poisson(gamma * R^2)` to `Poisson(gamma * 2R^2)`.
 - Added an inline comment to `baseline_nearby_rule()` in both experiment notebooks noting that `pickup_alpha` and `drop_bias` are legacy parameters and are not used by the current switching heuristic.
+
+### 12. Deferred Movement Geometry Issue 28
+
+- Marked issue 28 as deferred by user decision.
+- Preferred future fix, if needed: replace x-first/y-first `step_towards()` movement with L1 geodesic interpolation along the segment from current position to target.
+- Rationale: the diamond feasible region is convex, so interpolating between two feasible endpoints stays inside `|x| + |y| <= R`; the interpolation also preserves L1 step length as `min(max_dist, manhattan(from_pt, to_pt))`.
