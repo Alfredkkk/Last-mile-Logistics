@@ -258,3 +258,10 @@ This file records code changes, experiment adjustments, and analysis updates for
 - Updated `NonStationary/analysis2.ipynb` to read `NonStationary/Results/training_log.csv` directly through `ns_results_path()`.
 - Removed the current analysis dependency on `training_log_clean.csv`; clean files are now treated only as archived legacy recovery artifacts.
 - Converted the convergence-cell comments and error messages to English.
+
+### 14. Issue 11 Delivery-Location Ride Visibility
+
+- Updated ride visibility in both experiment notebooks so pickup radius and TTL feasibility are evaluated from the active package delivery target instead of the vehicle's current position.
+- Added a visibility-reference helper that falls back to vehicle position only when no package delivery target exists.
+- Aligned switching, Voronoi, and four-zone heuristic ride selection with the same delivery-reference point used by `_visible_rides()`.
+- Updated README visibility documentation to state that visible rides are screened and sorted from the delivery target, while ride observation features remain encoded relative to the vehicle position.

@@ -69,10 +69,11 @@ For the non-stationary notebook, use the analogous cell in `NonStationary/experi
 
 ### Request visibility & TTL
 - **Visible rides** must satisfy both:
-  1) **Pickup within radius** $r_{\text{pick}}=\alpha \cdot \frac{R}{\sqrt 2}$ (`R_PICK_ALPHA = α`).
-  2) **Feasible by TTL**: ETA to pickup $\le$ remaining TTL.  
-     Code: `eta_min = manhattan(pos, pickup) / V` and require `eta_min <= ttl * DT`.
-- At most `MAX_VISIBLE_RIDES` **closest** pickups are exposed each step.
+  1) **Pickup within radius** $r_{\text{pick}}=\alpha \cdot \frac{R}{\sqrt 2}$ (`R_PICK_ALPHA = α`) of the current delivery target, not the vehicle's current position.
+  2) **Feasible by TTL**: ETA from that delivery target to pickup $\le$ remaining TTL.  
+     Code: `eta_min = manhattan(visibility_ref, pickup) / V` and require `eta_min <= ttl * DT`.
+- The visibility reference is the package delivery target currently used by `_nearest_package()`; if no package target exists, the environment falls back to the vehicle position.
+- At most `MAX_VISIBLE_RIDES` **closest** pickups to that visibility reference are exposed each step.
 - Unaccepted rides expire when their TTL reaches 0 (TTL is stored in **steps**; decremented by 1 per step).
 
 ### Termination
@@ -86,12 +87,12 @@ An episode ends when **either**:
 - Core: $[x/R,\, y/R,\, \text{time\_frac}=t/\text{HORIZON\_MIN},\, \mathbf{1}_{\text{to\_pickup}},\, \mathbf{1}_{\text{with\_pass}},\, \text{pkg\_count\_norm},\, \text{visible\_norm}]$.
 - Non-stationary runs additionally include cyclic hour-of-day features: $\sin(2\pi h)$ and $\cos(2\pi h)$, where $h=(t\bmod 1440)/1440$.
 - Nearest `K_NEAREST_PACK` packages: for each $(\Delta x/R,\,\Delta y/R,\, d_1/R)$.
-- Up to `MAX_VISIBLE_RIDES` rides: for each $(\Delta x_{\text{pick}}/R,\,\Delta y_{\text{pick}}/R,\, d_{1,\text{pick}}/R,\,\Delta x_{\text{drop}}/R,\,\Delta y_{\text{drop}}/R,\, \text{trip\_len}/R)$.
+- Up to `MAX_VISIBLE_RIDES` rides: for each $(\Delta x_{\text{pick}}/R,\,\Delta y_{\text{pick}}/R,\, d_{1,\text{pick}}/R,\,\Delta x_{\text{drop}}/R,\,\Delta y_{\text{drop}}/R,\, \text{trip\_len}/R)$. Ride features remain encoded relative to the vehicle position, even though the visible set is screened from the delivery target.
 - Zero-padded when fewer items exist.
 
 ### Action space (discrete)
 - `0` = **deliver** (go toward nearest package).
-- `1..MAX_VISIBLE_RIDES` = accept the $i$-th visible ride (closest pickups first).  
+- `1..MAX_VISIBLE_RIDES` = accept the $i$-th visible ride (closest pickups to the delivery-reference point first).  
   Invalid indices are **masked** (logits set to $-10^9$).
 
 

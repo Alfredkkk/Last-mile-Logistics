@@ -15,7 +15,7 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 - Treat `main()` as an unused/obsolete training entry and disable it rather than maintaining it as a supported path.
 - Handle the remaining model-alignment and analysis issues in later stages.
 - Treat issue 10 as an intentional modified switching heuristic: the pre-grace window is kept because it improved training/evaluation behavior relative to the stricter paper timing.
-- Treat issue 11 as unresolved pending advisor discussion.
+- Fix issue 11 after advisor confirmation: ride visibility is now screened from the package delivery target rather than the vehicle's current position.
 - Treat issue 12 as out of scope: the project does not need to restrict parameter ranges to the paper's numerical figures.
 - For issue 19, use `rate` / `avg_rate` as the main time-weighted aggregate metric and keep `ep_rate` / `avg_ep_rate` as a diagnostic mean of per-episode rates.
 - For issues 20-21, replace fragile path strings with notebook-local path resolvers that locate the project root and non-stationary results directory.
@@ -51,7 +51,7 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 8. The code uses `|x| + |y| <= R` with area `2 * R^2`, while the paper defines edge-length `R` with area `R^2`. Status: resolved on 2026-06-01 by keeping the code convention and documenting it as the project geometry.
 9. `readme.md` and code comments disagree about diamond area (`R^2` vs `2 * R^2`). Status: fixed on 2026-06-01 through the issue 25/26 README and notebook comment cleanup.
 10. `baseline_nearby_rule()` uses a pre-grace window that may accept a ride before actually completing the package delivery, which is more aggressive than the paper's switching description. Status: accepted intentional modeling change; keep current behavior and document as a modified/pre-grace switching heuristic.
-11. Ride visibility is computed from current vehicle position, not the final delivery location used in the paper's screening logic. Status: unresolved; defer until advisor discussion.
+11. Ride visibility is computed from current vehicle position, not the final delivery location used in the paper's screening logic. Status: fixed on 2026-06-09 after advisor confirmation by adding a delivery-target visibility reference in both experiment notebooks and aligning heuristic ride selection with that reference.
 12. Project sweeps use arrival-rate and TTL settings that are extensions, not a direct reproduction of the paper's Figure 7/8 calibration. Status: accepted; no action needed because the project is not constrained to the paper's plotted parameter range.
 
 ### Results and Analysis
