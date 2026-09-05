@@ -265,3 +265,9 @@ This file records code changes, experiment adjustments, and analysis updates for
 - Added a visibility-reference helper that falls back to vehicle position only when no package delivery target exists.
 - Aligned switching, Voronoi, and four-zone heuristic ride selection with the same delivery-reference point used by `_visible_rides()`.
 - Updated README visibility documentation to state that visible rides are screened and sorted from the delivery target, while ride observation features remain encoded relative to the vehicle position.
+
+### 15. 2026-08-07 Re-Review Decisions
+
+- Confirmed that the active CSV/PNG files predate the June fixes because the experiments have not yet been rerun; this is expected and is not treated as a current code issue.
+- Confirmed that revenue rate should still be reported for horizon-truncated episodes; no additional unfinished-package penalty will be added, and `finish_rate` remains the separate completion diagnostic.
+- Added debug issue 29 as deferred: later investigate whether PPO's discounted cumulative-reward objective helps explain low package completion rates or differs materially from the evaluated revenue-rate objective. No PPO objective or reward change was made in this pass.

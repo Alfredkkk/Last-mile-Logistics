@@ -26,6 +26,9 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 - For issue 27, keep the legacy baseline parameters but explicitly document that they are not active in the current switching heuristic.
 - Treat issue 28 as deferred: keep the current movement implementation for now, but retain L1 geodesic interpolation as the preferred future fix if boundary projection becomes material.
 - Current training-log pipeline uses fresh fixed-schema `training_log.csv` files directly. Legacy training logs were archived under `archive/training_logs/`.
+- Treat the pre-fix active CSV/PNG files as expected historical outputs until the post-debug experiments are rerun; their current age/schema is not a code blocker.
+- Continue reporting revenue rate for horizon-truncated episodes without adding an unfinished-package penalty; incomplete delivery remains visible through `finish_rate`.
+- Defer issue 29 for future research: investigate whether PPO's discounted-return objective contributes to low package completion rates or differs materially from the evaluated revenue-rate objective.
 
 ### First-Round Scope
 
@@ -63,6 +66,7 @@ Record the issues found in the May 31, 2026 review of the stationary and non-sta
 17. "Optimal alpha" plots apply alpha optimization to pure delivery baselines, where alpha has no model meaning. Status: fixed on 2026-06-01 by applying best-alpha selection only to ride-aware algorithms (`DRL`, `HEUR`, `HEUR_VOR`) and averaging `PURE` / `PURE_OR` across alpha.
 18. Evaluation uses only `EVAL_EPISODES = 5`, so reported comparisons may have high Monte Carlo variance. Status: recommendation recorded on 2026-06-01. Keep `EVAL_EPISODES = 5` for quick/debug sweeps; use `20` for final full sweeps; use `30` for small final confirmation runs when runtime is manageable.
 19. Aggregation uses mean of per-episode rates instead of `E[Reward] / E[Time]`, while the paper's objective is the latter. Status: fixed on 2026-06-01 by redefining the main `avg_rate` / CSV `rate` metric as `sum(reward) / sum(terminal_time)` and adding diagnostic `avg_ep_rate` / CSV `ep_rate` as `mean(reward_i / terminal_time_i)`.
+29. PPO is trained with a discounted cumulative-reward objective, while final policy performance is evaluated using revenue rate. This objective difference may be one possible contributor to low package completion rates, but it has not been established as the cause. Status: deferred by user decision on 2026-08-07; keep the current PPO objective, reward function, horizon handling, and incomplete-episode revenue-rate reporting unchanged, and revisit this as a future research question.
 
 ### Metric Definitions Adopted for Issue 19
 
