@@ -1,0 +1,36 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 35
+Mao, Wenzheng, Liu Ming, Ying Rong, Christopher S Tang, Huan Zheng. 2019. Faster deliveries and
+smarter order assignments for an on-demand meal delivery platform. Available at SSRN 3469015.
+Martin, Sebastien, Sean J Taylor, Julia Yan. 2024. Trading flexibility for adoption: Dynamic versus
+static walking in ridesharing.Management Science Forthcoming.
+Masson, Renaud, Anna Trentini, Fabien Lehuédé, Nicolas Malhéné, Olivier Péton, Houda Tlahig.
+2017. Optimization of a city logistics transportation system with mixed passengers and goods.
+EURO Journal on Transportation and Logistics6(1) 81–109.
+Nguyen, Ngoc-Quang, Nguyen-Viet-Dung Nghiem, Phan-Thuan Do, Khac-Tuan LE, Minh-Son Nguyen,
+Naoto Mukai. 2015. People and parcels sharing a taxi for tokyo city.Proceedings of the 6th
+International Symposium on Information and Communication Technology. 90–97.
+NYC Department of Transportation. 2018. New York City Mobility Report.https://www.nyc.
+gov/html/dot/downloads/pdf/mobility-report-2018-screen-optimized.pdf. Accessed on
+August 4, 2023.
+NYC Taxi and Limousine Commission. 2023. TLC Trip Record Data.https://www.nyc.gov/site/
+tlc/about/tlc-trip-record-data.page. Accessed on August 4, 2023.
+Ouyang, Yanfeng. 2007. Design of vehicle routing zones for large-scale distribution systems.Trans-
+portation Research Part B: Methodological41(10) 1079–1093.
+Qi, Wei, Lefei Li, Sheng Liu, Zuo-Jun Max Shen. 2018. Shared mobility for last-mile delivery:
+Design, operational prescriptions, and environmental impact.Manufacturing & Service Operations
+Management 20(4) 737–751.
+Ronald, Nicole, Jie Yang, Russell G Thompson. 2016. Exploring co-modality using on-demand
+transport systems. Transportation Research Procedia12 203–212.
+Rosenkrantz, Daniel J, Richard E Stearns, Philip M Lewis, II. 1977. An analysis of several heuristics
+for the traveling salesman problem.SIAM journal on computing6(3) 563–581.
+Ross, Sheldon M. 2014.Introduction to probability models. Academic press.
+Schneider, Todd. 2023. Taxi and Ridehailing Usage in New York City.https://toddwschneider.
+com/dashboards/nyc-taxi-ridehailing-uber-lyft-data/#notes. Accessed on August 4, 2023.
+Taylor,TerryA.2018. On-demandserviceplatforms. Manufacturing & Service Operations Management
+20(4) 704–720.
+Toyota. 2018. Toyota unveils e-Palette concept at CES 2018.https://www.toyota.ca/toyota/en/
+connect/2000/toyota-e-palette-concept-vehicle-ces-2018 . Accessed on August 10, 2023.
+Wang, Hai, Hai Yang. 2019. Ridesourcing systems: A framework and review.Transportation Research
+Part B: Methodological129 122–155.
+Yan, Chiwei, Helin Zhu, Nikita Korolko, Dawn Woodard. 2020. Dynamic pricing and matching in
+ride-hailing platforms. Naval Research Logistics (NRL)67(8) 705–724.

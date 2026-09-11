@@ -1,0 +1,66 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 59
+because the difference in their x-coordinates increases by the same amount as the decrease of their
+difference in the y-coordinates. It follows that the two squares maintain the same distance from each
+other, and therefore, the non-overlapping property holds.
+Now, we need to check if moving one square (let it beS(x∗
+k1,r∗
+k1)) toward the vertex would violate
+the non-overlapping constraints with other squares that do not lie on the boundary. If not, the desired
+result follows. Otherwise, supposeS(x∗
+k3,r∗
+k3) is the one that is closest to the edge among all the
+squares that will intersectS(x∗
+k1,r∗
+k1) along its moving path. Similar to the argument in (I),x∗
+k3 can
+be moved to the boundary edge without violating the non-overlapping constraints. Then we can
+repeat the above operations for the pairx∗
+k2 and x∗
+k3 because they are now on the two intersecting
+edges (and x∗
+k3 is closer to the vertex thanx∗
+k1). This procedure will stop once all four vertices belong
+toX∗. Because the objective function value and feasibility conditions do not change, the new set of
+squares is also optimal to problem (7), and the result is proved. □
+The intuition behind Proposition 8 is that maximizing the average edge length should lead to
+a set of squares that are spread out in the service region, pushing the centroids to the boundary.
+Furthermore, locating squares on the vertices of the service region would take minimum space from
+A, so there is more room for enlarging squares (and increasing their inradiuses) insideA.
+Based on Proposition 8, we can evaluateG2(K) by conditioning on the number of centroids on the
+boundary, which is denoted by4≤Kb≤K (including the vertices). Furthermore, the non-overlapping
+constraints can be relaxed to admit a convex program that can be efficiently solved. Without loss
+of generality, we normalizeR to be 1. We formulate a relaxed version of problem(7) as follows.
+According to Proposition 8, for anyK≥4, an optimal solution to problem(7) should include the
+four vertices ofA. Conditioning on the number of points on the boundary (including the vertices)
+4≤Kb≤K, we solve
+max
+r1,...,rK≥0
+2
+√
+2
+K
+K∑
+k=1
+rk (27)
+s.t.
+4∑
+k=1
+r2
+k + 2
+Kb∑
+k=5
+r2
+k + 4
+K∑
+k=Kb+1
+r2
+k≤1, (28)
+2
+Kb∑
+k=1
+rk≤4, (29)
+where the objective function is the same as problem(7), constraint(28) ensures that the total area of
+squares overlapping withA is less or equal to 1, and constraint(29) ensures the total edge length of
+squares on the boundary do not exceed the perimeter of the service region (= 4R = 4). These two
+constraints are satisfied if the squares are non-overlapping. We use a key observation that a square of
+inradiusr on the boundary takes2r from the periphery if it is located on a vertex or does not overlap

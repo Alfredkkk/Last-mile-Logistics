@@ -1,0 +1,35 @@
+34 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+Feldman,Pnina,AndrewEFrazelle,RobertSwinney.2023. Managingrelationshipsbetweenrestaurants
+and food delivery platforms: Conflict, contracts, and coordination.Management Science 69(2)
+812–823.
+Feng, Guiyun, Guangwen Kong, Zizhuo Wang. 2021. We are on the way: Analysis of on-demand
+ride-hailing systems. Manufacturing & Service Operations Management23(5) 1237–1256.
+Furuhata, Masabumi, Maged Dessouky, Fernando Ordóñez, Marc-Etienne Brunet, Xiaoqing Wang,
+Sven Koenig. 2013. Ridesharing: The state-of-the-art and future directions.Transportation Research
+Part B: Methodological57 28–46.
+Garg, Nikhil, Hamid Nazerzadeh. 2022. Driver surge pricing.Management Science 68(5) 3219–3235.
+Guda, Harish, Upender Subramanian. 2019. Your uber is arriving: Managing on-demand workers
+through surge pricing, forecast communication, and worker incentives.Management Science 65(5)
+1995–2014.
+Hu, Bin, Ming Hu, Han Zhu. 2022. Surge pricing and two-sided temporal responses in ride hailing.
+Manufacturing & Service Operations Management24(1) 91–109.
+Karp, Richard M. 1977. Probabilistic analysis of partitioning algorithms for the traveling-salesman
+problem in the plane.Mathematics of operations research2(3) 209–224.
+Ledvina, Kirby, Hanzhang Qin, David Simchi-Levi, Yehua Wei. 2022. A new approach for vehicle
+routing with stochastic demand: Combining route assignment with process flexibility.Operations
+Research 70(5) 2655–2673.
+Li, Baoxiang, Dmitry Krushinsky, Hajo A Reijers, Tom Van Woensel. 2014. The share-a-ride problem:
+People and parcels sharing taxis.European Journal of Operational Research238(1) 31–40.
+Li, Baoxiang, Dmitry Krushinsky, Tom Van Woensel, Hajo A Reijers. 2016. The share-a-ride problem
+with stochastic travel times and stochastic delivery locations.Transportation Research Part C:
+Emerging Technologies67 95–108.
+Li, Feng, Xin Guo, Li Zhou, Jianjun Wu, Tongfei Li. 2022. A capacity matching model in a collaborative
+urban public transport system: integrating passenger and freight transportation.International
+Journal of Production Research60(20) 6303–6328.
+Li, Zhujun, Amer Shalaby, Matthew J Roorda, Baohua Mao. 2021. Urban rail service design for
+collaborative passenger and freight transport. Transportation Research Part E: Logistics and
+Transportation Review147 102205.
+Liu, Sheng, Long He, Zuo-Jun Max Shen. 2021. On-time last-mile delivery: Order assignment with
+travel-time predictors.Management Science 67(7) 4095–4119.
+Ma, Hongyao, Fei Fang, David C Parkes. 2022. Spatio-temporal pricing for ridesharing platforms.
+Operations Research70(2) 1025–1041.

@@ -1,0 +1,34 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 3
+in a predetermined service region, following the common package delivery practice in e-commerce
+applications. When the driver delivers packages (e.g., based on the solution to a traveling salesman
+problem, TSP), he/she can also accept real-time ride requests from an on-demand ride platform.
+Unlike package delivery to known destinations, passenger ride requests are uncertain in both temporal
+and spatial dimensions. Intuitively, the driver would prefer to take a ride with a pickup location near
+one of the package drop-off locations. Moreover, ideally, the drop-off location of the ride may not
+fall in the areas that the driver has visited during previous delivery trips (otherwise, it could lead
+to an “inefficient” route to deliver the remaining packages). We operationalize these rules in a new
+coordination policy based on zoning – the use of zoning is prevalent in practical delivery systems
+and often leads to interpretable routes preferred by drivers (Arslan and Abay, 2021), and our policy
+leverages zoning to trade off the flexibility of serving on-demand rides and package delivery efficiency.
+We build our analytical model to shed light on the potential of coordinating package delivery and
+on-demand ridesfrom the driver’s perspectiveby understanding the revenue/productivity implications.
+The key part of our analysis is to characterize the synergy between package delivery and serving
+on-demand passenger rides. We note that the considered setting is not limited to the coordination of
+package delivery and passenger rides but scheduled jobs and on-demand jobs in a spatial context,
+where the on-demand jobs include any mobility/logistics services that are associated with an origin-
+destination pair.
+1.1. Our Contributions
+The main contributions of our paper can be summarized below.
+1.1.1. Modeling of A Co-Modal System. We introduce a parsimonious co-modal logistics
+setting that differentiates package delivery and on-demand rides in two dimensions: (i) spatial
+uncertainty and (ii) routing. On the one hand, package delivery locations are revealed beforehand,
+whereas on-demand ride pickup and drop-off locations are only known upon arrival. On the other
+hand, packages are preloaded and can be delivered through a TSP route, while on-demand rides
+are point-to-point trips. Our model captures various trip components that connect the two types of
+jobs, including the deviation from the TSP route due to pickups and drop-offs. To the best of our
+knowledge, we are the first to study this co-modal system analytically with a focus on the driver’s
+revenue performance.
+1.1.2. A Zoning-Based Coordination Policy and Its Revenue Performance. We develop a
+new coordination policy that coordinates package delivery and on-demand ride requests by partitioning
+the service region into zones. The key idea is to use zones to filter and sequence package delivery
+and on-demand ride jobs based on their locations. Specifically, the decision to accept the next ride

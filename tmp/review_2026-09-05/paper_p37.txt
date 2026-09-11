@@ -1,0 +1,39 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 37
+Appendix A: Example Partitions for Heterogeneous Package Demand and Ride Arrivals
+The proposed zoning policy leverages simple equal-area partitions to balance package demand in the
+uniform case withN =k2. For general cases with heterogeneous package demand (distribution) and
+any integer value ofN, there are partitioning techniques to maintain the same package demand or
+delivery distance across zones. For example, let the package demand density function be
+√
+x2
+1 +x2
+2,
+where x1 and x2 are the x and y coordinates, respectively. Figure 10 presents an equal-demand
+partition for 7 zones using the workload-balancing zoning algorithm developed by Ouyang (2007).
+Furthermore, it is possible to balance the delivery workload and ride-request demand at the same
+time. To do so, we can employ the technique recently developed in Carlsson et al. (2024), where a
+partitioning algorithm that combines ham-sandwich cuts and fan cuts is developed to balance two
+measurable functions in 2D (such a partition is proved to always exist). As an example, Figure 11
+illustrates the resulting partition that balances
+√
+x2
+1 +x2
+2 and x2
+1x2
+2 at the same time.
+Figure 10 The partition that balances
+√
+x2
+1 +x2
+2 with N = 7 zones using the balancing algorithm from Ouyang
+(2007).
+Appendix B: Relaxing the Restriction of Ride Destinations
+In this section, we simulate the performance of the proposed zoning policy and the zoning policy
+that allows coming to previously visited zones (termedflexible zoning policy), of which the revenue
+performance and total delivery time are summarized in Table 2. Specifically, we setn = 50and choose
+a relatively high passenger revenue raterp = 5 (the package revenue is normalized to be 1). Table 2
+presents the revenue (delivery time) ratio between the flexible zoning policy and the proposed zoning
+policy, as denoted byR′/R (T′/T). We observe that the flexible zoning policy results in a lower
+revenue rate than the proposed zoning policy (R′/R< 1) whenα2λt0∈{1, 2}or N∈{20, 30}. The
+flexible zoning policy only outperforms the proposed zoning policy when both the arrival rate and the
+number of zones are large, and the improvement is less than 3%.

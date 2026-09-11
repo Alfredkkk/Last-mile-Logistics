@@ -1,0 +1,49 @@
+12 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+assumption, each zone observes the same passenger request arrival rate ofλ/4. We call this policy the
+four-zone policy (FZ).
+Because the driver only accepts ride requests going to a zone that is yet to be delivered, the
+probability of taking up a passenger ride upon finishing the package delivery in thei-th visited zone is
+P(accept a passenger ride request when delivering in theith visited zone)
+=1−P(no requests with a drop-off location from the(4−i) unvisited zones) = 1−exp(−(4−i)α2λt0/4),
+where α2λis the passenger ride arrival rate to the admissable area that is withinαRfrom the final
+delivery location and(4−i)/4 is the probability that the drop-off location is from an unvisited zone.
+We introduce the key components of the driver’s travel distance under the four-zone policy:
+(I) The first component,L1, captures the expected passenger ride distance between a random
+pickup and a drop-off location from different zones, which can be computed asc1(α)R. The
+dependence ofL1 on αis due to the fact that the passenger ride origin location is affected
+by the maximum pickup distancer. For a given value ofα, we show in Appendix C how to
+evaluateL1 by integrating the density function of pickup and drop-off locations. To simplify
+the integral, we approximate the distribution of the drop-off location by a uniform distribution
+over the service zone; technically, the drop-off location is only uniformly distributed over
+the unvisited zones, but the randomness of the unvisited zones makes the drop-off location
+approximately uniform across the whole region (see Appendix C for numerical comparisons).
+(II) The second component,L2, characterizes the expected (additional) pickup and drop-off distance
+required to serve the passenger ride request. Specifically, the passenger pickup trip starts
+from the last package delivery location towards the origin of the passenger request, of which
+the distance can be computed asα2R. The drop-off distance accounts for the trip from the
+passenger drop-off location (destination) to the nearest package delivery location in the same
+zone, which we can compute asc2R/√n. We formalize these relationships in Proposition 1
+(the proofs of the technical results in the paper are provided in Appendix D).
+Proposition 1. Suppose package locations follow a homogeneous two-dimensional point
+process with rateγsuch thatn =γR2. Under the proposed zoning policy, the expected pickup
+and drop-off distance for each passenger ride request is
+L2 =
+√
+2
+3 αR+
+√π
+2
+√
+2
+R√n =α2R +c2
+R√n,
+whereα2 =
+√
+2
+3 αand c2 =
+√π
+2
+√
+2.
+The inverse square root function in the expected drop-off distance reveals thecomplementarity
+between package delivery and on-demand rides: a greater number of package delivery locations

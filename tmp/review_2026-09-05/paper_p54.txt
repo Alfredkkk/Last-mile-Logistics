@@ -1,0 +1,121 @@
+54 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+where cl = 7
+√
+2
+15 . Then,
+R⋄(n,λ) =vnrp +l2rt
+l1 +l2
+.
+Note thatl1 +l2≥βR√n, so we have
+R⋄(n,λ)/v≤max
+1≤m≤n
+nrp +mclRrt
+max{c2R
+√
+n2/(n +m) +mclR,βR√n}≤max
+1≤m≤n
+nrp +mclRrt
+max{c2R
+√
+n/2 +mclR,βR√n}.
+– Whenc2R
+√
+n/2 +mclR≤βR√n, i.e., whenm≤(βR−c2R/
+√
+2)√n
+clR , it holds that
+R⋄(n,λ)/v≤
+nrp + (βR−c2R/
+√
+2)√n
+clR clRrt
+βR√n =nrp + (βR−c2R/
+√
+2)√nrt
+βR√n .
+– On the other hand, whenm≥(βR−c2R/
+√
+2)√n
+clR , it holds that
+R⋄(n,λ)/v≤ max
+(βR−c2R/
+√
+2)√n
+clR ≤m≤n
+nrp +mclRrt
+c2R
+√
+n/2 +mclR =rt + max
+(βR−c2R/
+√
+2)√n
+clR ≤m≤n
+nrp−c2R
+√
+n/2rt
+c2R
+√
+n/2 +mclR.(17)
+We optimize form. Ifnrp−c2R
+√
+n/2rt≥0, i.e.,n≥1
+2(C2Rrt
+rp )2, thenm∗= (βR−c2R/
+√
+2)
+clR
+√n. In this
+case,
+R⋄(n,λ)/v≤rt +nrp−c2R
+√
+n/2rt
+βR√n =nrp + (βR−c2R/
+√
+2)√nrt
+βR√n . (18)
+Otherwise, ifnrp−c2R
+√
+n/2rt≤0, i.e.,n≤1
+2(C2Rrt
+rp )2, then from (17), we have
+R⋄(n,λ)/v≤rt.
+To summarize from (17) and (18), we have
+R⋄(n,λ)/v≤max
+{
+rt,nrp + (βR−c2R/
+√
+2)√nrt
+βR√n
+}
+. (19)
+Next we compare two quantities in (19). Note that
+nrp + (βR−c2R/
+√
+2)√nrt
+βR√n = rp
+βR
+√n + (β−c2/
+√
+2)
+β rt.
+For ease of notation, we defineξ= (β−c2/
+√
+2)R and ξ′= β−c2/
+√
+2
+β . Then, when
+n≤((1−ξ′)βRrt
+rP
+)2,
+we havert≥nrp+(βR−c2R/
+√
+2)√nrt
+βR√n , so it holds that
+R⋄(n,λ)/v≤rt.
+On the other hand, whenn≥( (1−ξ′)βRrt
+rP
+)2, we have
+R⋄(n,λ)/v≤nrp + (βR−c2R/
+√
+2)√nrt
+βR√n .

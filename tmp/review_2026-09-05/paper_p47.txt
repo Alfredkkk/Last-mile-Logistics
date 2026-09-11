@@ -1,0 +1,77 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 47
+Figure 16 Two squares that are closest to each other with centroidsx∗
+k and x∗
+k′, respectively. Here,d∗
+k =||x∗
+k−x∗
+k′||
+is measured inℓ1-distance.
+Proof of Lemma 1. According to the definition,
+ψ1(λ,N) =
+∫ N
+0
+(1−exp(−ℏλ(N−x)/N))dx
+=
+∫ N
+0
+(1−exp(−ℏλx/N))dx
+=N + N
+ℏλexp(−ℏλx/N)|N
+0
+=N + N
+ℏλ(exp(−ℏλ)−1).
+Forψ2, we similarly have
+ψ2(λ,N) =
+∫ N
+1
+exp(−α2λt0(N−x)/N)/
+√
+N + 1−xdx
+= exp(−α2λt0)
+∫ N
+1
+exp(α2λt0x/N)/
+√
+N + 1−xdx
+= exp(α2λt0/N)
+∫ N
+1
+exp(−α2λt0x/N)/√xdx.
+For notation simplicity, we letc =α2λt0/N. We compute the integral. Letu =√x so x =u2. Then,
+dx = 2udu. By substituting into the integral,
+∫ b
+a
+exp(−cx)/√xdx = 2
+∫ √
+b
+√a
+exp(−cu2)du = 2·
+√π
+2√c(erf(
+√
+cb)−erf(√ca)) =
+√π√c (erf(
+√
+cb)−erf(√ca)).
+Therefore,
+ψ2(λ,N) = exp(α2λt0/N)·
+√
+πN√α2λt0
+(erf(
+√
+α2λt0)−erf(
+√
+α2λt0/N)).
+Thus, we can writeψ2 as
+ψ2(λ,N) =ςN(λ)
+√
+N,
+where
+ςN(λ) = exp(α2λt0/N)·
+√π√α2λt0
+(erf(
+√
+α2λt0)−erf(
+√
+α2λt0/N)).
+□

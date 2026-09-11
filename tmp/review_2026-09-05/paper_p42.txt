@@ -1,0 +1,82 @@
+42 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+the probability density scales with the areaB(x,y )∩A. Next we compute the probability density
+function over the outer diamond. There are four scenarios:
+(I) For each point(x,y ) inAI, i.e., if|x|,|y|≤(1−α)R/2 , we have|B(x,y )∩A′|=α2R2/2;
+(II) If|x|≤(1−α)R/2 and|y|> (1−α)R/2, we have|B(x,y )∩A′|=αR((1 +α)R−y);
+(III) If|x|> (1−α)R/2 and|y|≤(1−α)R/2, we have|B(x,y )∩A′|=αR∗((1 +α)R−x);
+(IV) If|x|> (1−α)R/2 and|y|> (1−α)R/2, we have|B(x,y )∩A′|= ((1 +α)R−x)((1 +α)R−y).
+Suppose the density in the inner diamond isu. Then we integrate over the first quadrant, and the
+sum of the probability density should be 1/4:
+(
+(1−α)R
+2
+)2
+u + 2u
+∫ (1−α)R/2
+0
+∫ (1+α)R/2
+(1−α)R/2
+αR·((1 +α)R
+2−x)dxdy/(α2R2)
++u
+∫ (1+α)R/2
+(1−α)R/2
+∫ (1+α)R/2
+(1−α)R/2
+(
+(1 +α)R
+2−x
+) (
+(1 +α)R
+2−y
+)
+dxdy/(α2R2) = 1
+4.
+It implies that (
+(1−α)R
+2
+)2
++ (1−α)αR2
+2 + 1
+4α2R2 = 1
+4u.
+Therefore, we have
+u = 1/R2.
+Substituting u, we reach our conclusion that
+ρ(x,y ) =
+
+
+
+1/R2, if|x|,|y|≤(1−α)R/2
+((1 +α)R/2−|x|)/(αR3), if|x|≤(1−α)R/2 and|y|> (1−α)R/2
+((1 +α)R/2−|y|)/(αR3), if|x|> (1−α)R/2 and|y|≤(1−α)R/2
+((1 +α)R/2−|x|) ((1 +α)R/2−|y|)/(α2R4), if|x|,|y|> (1−α)R/2.
+For any two points(x1,y 1) and (x2,y 2) in the constructed coordinate plane, theℓ1 distance in the
+original coordinate plane is
+D((x1,y 1), (x2,y 2)) =
+√
+2
+2 |x1−x2−y1 +y2|+
+√
+2
+2 |y1−y2 +x1−x2|.
+Therefore, the expected passenger ride distanceL1 is
+L1 =
+∫∫
+(x1,y1)∈AO,(x2,y2)∈A′
+1
+R2ρ(x1,y 1)D((x1,y 1), (x2,y 2))d(x1,y 1)d(x2,y 2).
+□
+Proof of Proposition 6. Pick a zone as the current zone (colored as orange) and assume its centroid
+is (0,0) (as shown in Figure 14). The delivery destination is uniformly distributed among the rest
+of zones (S′). The edge length of that delivery zone in the FZ policy isR/2. Applying the result in
+Lemma 3, conditional on that the last delivery destination is uniformly distributed in that zone, the
+probability density function of that ride origin is
+ρR/2(x,y ) =
+
+
+
+4/R2, if|x|,|y|≤(1−α)R/4
+((1 +α)R/4−|x|)/(α(R/2)3), if|x|≤(1−α)R/4 and|y|> (1−α)R/4
+((1 +α)R/4−|y|)/(α(R/2)3), if|x|> (1−α)R/4 and|y|≤(1−α)R/4
+((1 +α)R/4−|x|) ((1 +α)R/4−|y|)/(α2(R/2)4), if|x|,|y|> (1−α)R/4.

@@ -1,0 +1,41 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 39
+develop an adaptive (or dynamic) flexible zoning policy that can manage the total delivery time well,
+the revenue potential may be more limited.
+Appendix C: Additional Results for Computing L1
+First, we present the probability density function of the passenger pickup location in Lemma 3. Note
+that because the pickup location is affected by the package location and the pickup radiusr, it turns
+out that the ride pickup locations are not uniformly distributed over the service region, as reflected
+by the expression ofρ(x,y ). Specifically, locations closer to the centroid have a greater likelihood of
+being chosen as the pickup point, in contrast to locations on the periphery of the service region.
+Lemma 3. Assume the package delivery location is uniformly distributed over the service region. In
+the rotated coordinate plane (by 45 degrees clockwise) with the origin located at the centroid, the
+probability density function of the passenger ride pickup location is
+ρ(x,y ) =
+
+
+
+1/R2, if|x|,|y|≤(1−α)R/2;
+((1 +α)R/2−|x|)/(αR3), if|x|≤(1−α)R/2 and|y|> (1−α)R/2;
+((1 +α)R/2−|y|)/(αR3), if|x|> (1−α)R/2 and|y|≤(1−α)R/2;
+((1 +α)R/2−|x|) ((1 +α)R/2−|y|)/(α2R4), if|x|,|y|> (1−α)R/2.
+Based on Lemma 3,L1 can be computed by integratingρ(x,y ) and the uniform density function
+of the drop-off location. There is a caveat: the drop-off location is uniformly distributed over the
+unvisited zones, which depend on the pickup location. Therefore, the integral can become complicated
+to evaluate when the number of possible combinations of unvisited zones gets large. To obtain a more
+tractable expression, we estimateL1 by dropping the zoning restriction, so the drop-off location is
+uniformly distributed over the service region. Figure 12 depicts the relationship between the estimated
+L1 and α, suggesting a convex increasing curve with a small increment. The values ofL1 range from
+0.66 to 0.70 asαincreases from 0 to 0.5.
+Next, we compare the approximationL1≈c1(α)R and the simulated average ride distance under
+the zoning policy. We setR = 1, t0 = 10 and design a discrete-event simulation where (i) the starting
+zone is randomly chosen and (ii) the on-demand ride requests follow a Poisson arrival process with
+uniformly distributed origins and destinations. We varyN ={4, 9, 16, 36, 64, 100}, λ={5, 10, 50}, and
+α={0.1, 0.2, 0.3, 0.4, 0.5}. For each scenario, we repeat the simulation for 20,000 runs and report the
+average value of the ride distance. Table 3 summarizes the average relative error of the approximation
+for L1. Note that forN = 4, we can evaluateL1 exactly using Proposition 6 presented below, where
+we utilize the fact that the four zones are symmetric. Therefore, we report the comparison result with
+the theoretical value forN = 4in Table 3. We observe that the used approximation provides good
+estimates of the average ride distance under different conditions (the error is below 5% most of the
+time). Although the error is larger whenN = 4, it only induces a small difference in the revenue rate
+(relative difference under 0.5%) for the considered parameter regimes because the revenue contribution
+from on-demand rides is relatively low.

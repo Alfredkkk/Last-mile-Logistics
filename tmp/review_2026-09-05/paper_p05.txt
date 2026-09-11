@@ -1,0 +1,34 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 5
+policy’s revenue rate achieves at least the same scaling pattern as the pure package delivery policy
+with respect to package density.
+The remainder of this paper is organized as follows. Section 1.2 discusses related literature. Section
+2 introduces the model setup for coordinating package delivery and on-demand rides, followed by the
+proposed zoning-based coordination policy. Section 3 analyzes the four-zone policy and its optimality
+conditions. Section 4 studies the general zoning policy and characterizes its structure under different
+market conditions, supported by a numerical study. Section 5 concludes the paper.
+1.2. Literature Review
+Our work on coordinating package delivery and on-demand rides is related to the three streams of
+literature: last-mile delivery (with shared mobility), ride-hailing, and co-modality in transportation.
+1.2.1. Last-mile Delivery. Last-mile delivery has received growing attention due to the rapid
+evolution of e-commerce. The most relevant to our work is the line of research on shared mobility for
+last-mile delivery, where shared passenger vehicles are dispatched to deliver packages (see practical
+examples such as Amazon Flex (2023)). Qi et al. (2018) consider a shared-mobility logistics setting
+that features a central warehouse and multiple subregions. They decide the optimal size (number) of
+the delivery subregions to minimize the total delivery cost under a continuous approximation scheme.
+Arslan et al. (2019) formulate a dynamic pickup and delivery problem that matches delivery jobs
+to both dedicated and ad hoc drivers. They apply a rolling-horizon approach that handles both the
+dynamically arriving jobs and ad hoc drivers. Cao et al. (2020) develop a framework that combines
+the use of ride-sharing platforms with traditional in-house van delivery systems for optimizing last-
+mile delivery. They formulate a discrete sequential packing problem, in which the drivers select
+bundles of packages and collect them from the warehouse in a decentralized manner. Fatehi and
+Wagner (2022) propose a robust crowdsourcing optimization model to study labor planning and
+pricing for crowdsourced last-mile delivery systems. Behrendt et al. (2023) consider a scheduling
+problem for the crowdsourced delivery platform, in which a mix of scheduled and ad hoc couriers
+serves dynamically arriving pickup and delivery orders. They present a prescriptive machine learning
+method that combines simulation optimization for offline training and a neural network for online
+solution prescription. These papers mainly treat crowdsourcing couriers as an additional supply with
+self-scheduling behaviors and do not consider the possibility of coordinating package delivery and
+on-demand rides.
+In addition, our work contributes to the emerging literature on same-day and food delivery operations
+management (Mao et al., 2019; Yildiz and Savelsbergh, 2019; Liu et al., 2021; Chen and Hu, 2023;
+Feldman et al., 2023; Besbes and Cachon, 2023; Carlsson et al., 2024). From a methodological

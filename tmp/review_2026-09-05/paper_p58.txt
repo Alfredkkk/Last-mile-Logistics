@@ -1,0 +1,42 @@
+58 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+(II) When K≥4, the four vertices ofA must belong toX∗.
+Proof of Proposition 8. We prove the result in two parts.
+(I) To show that outermost points ofX∗must lie on the boundary ofA, it suffices to prove
+that for any solutionX′(with square inradiuses{r′
+1,...,r′
+K}) whose outermost points do not lie
+on the boundary, we can move those points to the boundary edge and keep the square inradiuses
+the same, so the squaresS(x′
+k,r′
+k), k = 1,...,K, are still feasible to problem(7). To see this, note
+that the outermost points are closest to the boundary, so moving the corresponding squares toward
+the boundary (along the direction that is perpendicular to the boundary edge) would not violate
+the non-overlapping constraints with respect to other squares. Therefore, the new solution with the
+outermost points lying on the boundary shares the same objective value as the original solution.
+(II) According to (I), whenK≥4, there exists an optimal solutionX∗with at least four points
+lying on the boundary ofA (corresponding to the four edges). If there are four points on the boundary
+that coincide with the vertices, the desired result follows. Suppose there is a vertex ofA that does
+not belong toX∗, then letx∗
+k1, x∗
+k2∈X∗be the two points on the two intersecting edges ofA that
+are closest to this vertex, respectively. Without loss of generality, assume this vertex is the left vertex
+of the service region (as shown in Figure 21). We make the following argument.
+Figure 21 Illustration ofS(x∗
+k1,r∗
+k1 ) andS(x∗
+k2,r∗
+k2 ). The two dashed lines are the two boundary edges of the
+service region, of which the intersection is a vertex.
+Claim: Moving eitherS(x∗
+k1,r∗
+k1) orS(x∗
+k2,r∗
+k2) toward the vertex can maintain that these two
+squares do not overlap with each other.
+To prove this claim, letx∗
+k1 be such that it is closer (or equidistant) to the vertex thanx∗
+k2 in
+the x-coordinate. Then movingx∗
+k1 toward the vertex (along the edge) does not change||x∗
+k1−x∗
+k2||

@@ -1,0 +1,58 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 13
+makes it easier to connect the passenger drop-off location and the package delivery route. In
+other words, when the packages are more densely distributed, the driver can traverse ride
+locations and delivery locations more efficiently.
+(III) Lastly, we useL3 to denote the expected travel distance between a pair of zones when no
+passenger ride requests are accepted, which we interpret as the inter-zone travel distance for
+package delivery. We approximateL3 by the expected distance between the centroids of a pair
+of zones,c3R =
+√
+2R/2 whenN = 4.6 Here,L3 is independent of the visiting sequence of zones
+because the four zones are symmetric, but this relationship may not hold forN> 4, which we
+will discuss in the next section.
+Based on the presented distance components, we are ready to define the expected revenue rate
+function. The expected total revenue of the four-zone policy, including the revenue from package
+delivery and passenger rides, is given by
+nrp +
+3∑
+i=1
+(1−exp(−(4−i)α2λt0/4))rtL1, (2)
+where the first term captures the expected package delivery revenue and the second term represents
+the expected ride-hailing revenue.
+The total expected delivery time consists of three parts. First, the expected within-zone package
+delivery time is incurred because a delivery path is formed to visit all packages in each zone, and we
+need to estimate the shortest Hamiltonian path length (instead of a TSP tour length). To this end,
+we adopt the strip strategy developed by Daganzo (1984), which suggests that the path distance can
+be approximated byβ(k−1)/
+√
+δfor k locations, whereδis the package location (point) density. It
+follows that the within-zone delivery distance for each zone is
+βn/N−1√
+n/A =β
+(√n
+N −1√n
+)
+R,
+and the total within-zone delivery time across all zones is (noteR =
+√
+A)
+N×β
+(√n
+N −1√n
+)
+R
+v =β
+(√n−N√n
+)R
+v =β
+(√n−4√n
+)R
+v when N = 4.
+Second, the expected travel time due to serving passenger rides can be computed by∑3
+i=1(1−
+exp(−(4−i)α2λt0/4))(L1 +L2)/v. Third, the expected total inter-zone travel time without carrying
+6Upon finishing all delivery jobs in a subregion, the driver may choose the nearest location from the neighboring
+zone to start the new delivery trip (given no passenger rides are accepted). In this case,L3 can be shorter thanc3R.
+However, the resulting ending location may not be optimal for connecting with subsequent trips in other zones. Instead
+of finding the optimal “connection” policy, we assume the driver picks the starting location randomly soL3 can be
+approximated by the expected distance between a random point and another random point from its neighboring zone.

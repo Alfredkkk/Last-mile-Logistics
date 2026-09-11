@@ -1,0 +1,61 @@
+44 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+R
+2
+R
+2
+y
+x
+(x, x + R
+2
+)
+Figure 15 The region for picking up passengers.
+follows a homogeneous spatial Poisson process with rateγ, the probability that the minimum distance
+is shorter thanr equals the probability that there is at least one point inNw(r), i.e.,
+P(Dmin(w)≤r) = 1−P(|Nw(r)|= 0) = 1−exp(−2γr2).
+Therefore, the probability density for the distance to the nearest neighbor is
+fDmin(r) = 4γrexp(−2γr2).
+Taking expectation with ignoring the boundary, we have
+E[Dmin] =
+∫ ∞
+0
+4γr2 exp(−2γr2)dr =
+√π
+2
+√
+2√γ=
+√π
+2
+√
+2
+√
+n/R2 = R√π
+2
+√
+2√n.
+Thus, we reach our conclusion that
+L2 =
+√
+2
+3 αR+
+√π
+2
+√
+2
+R√n =α2R +c2
+R√n,
+where α2 =
+√
+2
+3 αand c2 =
+√π
+2
+√
+2. □
+Proof of Proposition 2.(I) To see the relation betweenRFZ (n,λ) and λ, we take the derivative
+with respect toλ. According to the definition,
+RFZ (n,λ) =v nrp/R +ψ0(λ)rtc1(α)
+β√n−4β
+√
+1/n +ψ0(λ)((c1(α) +α2−c3) +c2
+1√n) + 3c3
+, (12)
