@@ -1,0 +1,30 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 41
+SO = square((−(1 + α)R/4,−(1 + α)R/4), ((1 + α)R/4, (1 + α)R/4)), and S′=
+square((−3R/4,−3R/4), (R/4,R/ 4))\square((−R/4,−R/4), (R/4,R/ 4)).
+C.1. Proofs for Appendix C
+R
+R
+2
+R
+2
+x
+y
+(x0, y0) ′
+inner diamond I
+outer diamond O
+(0,0)
+Figure 13 Pickup areas.
+Proof of Lemma 3. We first characterize the probability distribution of the passenger pick-up
+location. Assume the service region centers at(0, 0) with edge lengthR, as shown in Figure 13. We
+construct the coordinates along the edge of diamonds (rotated by 45 degree clockwise). Since the
+driver will only accept the order from at mostr = αR√
+2-distance away, the range of the entire pick-up
+area is larger than the original service region. It is a diamond with edge length(1 +α)R, which we
+call the outer diamond (green diamond in Figure 13), denoted asAO =square((−(1 +α)R/2,−(1 +
+α)R/2), ((1 +α)R/2, (1 +α)R/2)) where square((x1,y 1), (x2,y 2) denotes the square defined by the
+diagonal (x1,y 1)−(x2,y 2). Define the inner diamondAI as the diamond with edge length(1−α)R (the
+orangediamondinFigure13),i.e., AI =square((−(1−α)R/2,−(1−α)R/2), ((1−α)R/2, (1−α)R/2)).
+Also defineA′=square((−R/2,−R/2), (R/2,R/ 2)).
+Under the assumption, the destination of the last delivery is uniformly distributed over the service
+region. For each point(x,y ) in the outer diamond as the passenger pick-up location, the origin can
+be anywhere in the diamond with edge lengthαRand centroid (x,y ), denoted asB(x,y ). Therefore,

@@ -1,5 +1,11 @@
 # 项目交接记录（2026-09-04，Windows 台式机）
 
+> 2026-09-21 最新目录/日志更新：四 notebook 统一由 project_paths.py 定位场景 Results，analysis 自动选择新运行/组日志并打印身份。日志、结果、汇总、检查点和进度已有 run_id，恢复保留编号；独立运行不再混画一条曲线。验证套件现为 53 项，完成后与调试快照一起归档到 archive/validation_2026-09-21；5 份旧训练日志在 archive/training_logs。运行时须保留根目录 experiment_support.py、training_persistence.py、project_paths.py。已确认兄弟 Uber_NYC 目录有 12 个原始月度文件，尚未重新拟合需求或运行正式 GPU 实验。下面较早记录按其日期/实施阶段理解。
+
+> 2026-09-21 最新后续：已加入逐组保存、完整训练检查点/恢复和进度显示，测试总数增至 45。两份实验 notebook 还需一起迁移新增 training_persistence.py。每次扫描打印独立保存目录，原调用传入 resume_dir 可跳过已完成组并接续未完成组；默认每 5 次更新保存检查点。新日志在各 combo_XXXX/training_log.csv，画收敛图需将 analysis 的 log_path 指向选定组。新运行已按目录隔离，逐行 run_id/跨运行分析仍未全面改造。CPU 精确恢复已验证；CUDA、完整扫描和其余原未关闭事项继续保留。
+
+> 2026-09-21 更新：以下盘点和迁移限制保留原始日期语境。审计 A1–A9、B1/B5 及 B2/B4 的批准范围已完成，38 项回归测试通过；详见 debug_log.md 的同日记录。训练回合可跨 PPO 更新继续；扫描自动识别等价 alpha、记录种子并先合并等价运行再择优，默认单种子为平稳 240 组、非平稳 180 组。B2 已补充已接受行程目标和可见订单 TTL，默认输入为 79/81，仍保留部分观测。B4 保留半径，明确 alpha_paper=alpha_code/√2；新结果记录 OBS_DIM 和论文尺度元数据。共享 experiment_support.py 须与 notebook 一起迁移，旧输入布局模型需重训或显式迁移。已用隔离 OR-Tools 9.15.6755 和临时目录中的 PyTorch 2.14.0+cpu 验证真实路线与小规模 CPU 更新；完整训练环境和 RTX 5070/CUDA 验证仍未完成。TTL 与额外 ETA 筛选保留，B6/B7/B8 和其他未关闭事项继续保留，历史结果文件尚未重跑。
+
 ## 阅读范围与限制
 
 递归盘点研究目录，排除 .git 内部文件后共 139 个文件：11 个 notebook、2 个 Python 脚本、3 个 Markdown、10 个 CSV、3 篇 PDF、110 张 PNG。解析 notebook 源码与保存的输出、CSV 全部记录和 PDF 文本；PNG 校验后按内容去重为 105 张，并通过缩略总览检查。此轮是项目接手梳理，不是逐行代码审计或实验复现。

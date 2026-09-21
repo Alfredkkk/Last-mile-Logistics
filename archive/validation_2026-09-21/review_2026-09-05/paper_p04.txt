@@ -1,0 +1,34 @@
+4 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+request depends on the proximity of its origin and whether its destination zone has already been
+delivered. This coordination policy enjoys the desirable theoretical and practical properties of zoning
+in optimal route planning, easing the need for real-time re-optimization. Furthermore, it goes beyond
+the existing partitioning research in logistics to present a unique way to balance delivery efficiency and
+service flexibility of ride-hailing. Notably, varying the number of zones changes the level of flexibility
+of the driver in responding to on-demand rides. By analyzing the stochastic driver trajectory, we
+characterize the expected revenue rate of the zoning policy.
+1.1.3. Optimal Zoning Policy and Its Performance Guarantee. We first examine a special
+case where the service region is divided into four symmetric zones and derive exact conditions under
+which the zoning policy outperforms the pure package delivery policy. For the general case where the
+number of partitioned zones needs to be optimized, we develop approximation schemes to estimate
+the trip distances between zones at different system states by exploiting a connection to the coverage
+problems in geometry that can be of independent interest. This gives rise to a lower bound of the
+expected revenue rate function that is asymptotically tight for a large number of zones. We prove
+that the revenue maximizer of the lower bound only takes three forms: the pure delivery policy, the
+four-zone policy, and the flexible switching policy (the driver can switch between package delivery
+and on-demand rides constantly). We then provide theoretical and numerical evidence to show that
+focusing on the above three policies can get performance close to that of the optimal zoning policy.
+Furthermore, we develop a full-information benchmark that gives an upper bound of the revenue rate
+of any coordination policy. We characterize the performance ratio of the optimal zoning policy to this
+benchmark and show that the zoning policy is close to optimal for a large number of packages.
+1.1.4. V alue of Co-Modality with Zoning. Our analysis offers a set of insights for operating
+co-modal transportation systems and understanding the value of coordinating package delivery and
+on-demand rides. First, we show that the zoning policy outperforms the pure package delivery policy
+when the package density is not too high and the profit from on-demand rides is large enough.
+Crucially, a higher package volume does not favor coordination; instead, the value of coordination
+diminishes relatively. In addition, we characterize the minimum revenue improvement of the optimal
+zoning policy against the pure delivery policy and delineate its dependence on the system parameters.
+We complement our analysis with a numerical study with parameters calibrated using the New York
+City taxi data. The numerical results validate our analysis and provide hints on how the revenue rate
+evolves with package volume and ride arrival rate in practical scenarios. In particular, we find that
+the revenue improvement from coordination can be up to 60% when the delivery capacity is very
+limited, which tends to be the case for crowdsourcing vehicles. Last but not least, the optimal zoning

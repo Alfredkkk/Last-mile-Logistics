@@ -1,0 +1,42 @@
+8 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+delivery platforms, including Postmates, Deliv, and DHL MyWays (Alnaggar et al., 2021). In addition
+topackagedelivery,thedrivercantakeon-demandpassengerriderequestsfromaplatform.Accordingly,
+the driver is paidrt per unit distance of passenger ride.2 However, unlike package delivery to known
+customer locations, passenger ride requests follow a stochastic process with uncertain pickup and
+drop-off locations (the locations are only realized upon request arrival). Specifically, we assume that
+the ride arrival process follows a Poisson distribution with rateλ, and both the origins and destinations
+are distributed uniformly over the service region. Here,λis taken to be exogenous, allowing us to
+focus on the logistics tradeoff between package delivery and on-demand rides. Understanding the
+platform-driver interactions is important to study the general management problems of co-modality
+systems, which we leave as a future research question. To prioritize the passenger ride experience, we
+assume the driver can not make deliveries when the passenger is already on board.
+The driver desires a policyπto coordinate package delivery and on-demand rides. Specifically, a
+coordination policy decides whether to accept an on-demand ride based on its origin and destination
+and the remaining packages to be delivered at any given time point. The goal is to maximize the
+expected revenue rate, which is defined by
+Rπ(n,λ) = E[Revenue]
+E[Total delivery time], (1)
+where the total delivery time includes travel time for delivery, passenger ride time, and connecting
+time between the two types of jobs (from a package delivery location to a passenger pickup location
+or from a passenger drop-off location to a package delivery location). The revenue function(1) stands
+for the long-run average revenue rate for the driver. We assume the delivery processes on different
+days are independent of each other, so one can treat the delivery process on each day as a renewal
+process. Then, according to the renewal reward theorem (Ross, 2014, Proposition 7.3), the empirical
+average of reward converges, almost surely and in mean, to(1). Note that the expected revenue rate
+can be interpreted as the driver productivity that measures the operational efficiency of co-modality.
+As a benchmark, the expected revenue rate of package delivery (referred to as the pure delivery
+policy, PD), when the driver does not take any passenger ride requests, can be estimated as
+RPD (n,λ) = vnrp
+β
+√
+nA
+=v√nrp
+βR,
+where β
+√
+nA approximates the expected TSP travel distance incurred to visitn locations in the
+service region of areaA, following the Beardwood-Halton Hammersley (BHH) Theorem (Beardwood
+et al., 1959).
+2Whereas the ride-hailing fare may include a fixed component, the main differentiating revenue structure between
+scheduled delivery jobs and ride-hailing jobs lies in the per-mile trip fare. Our result will hold if we introduce a fixed
+revenue part to ride-hailing trips.

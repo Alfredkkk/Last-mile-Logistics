@@ -1,5 +1,0 @@
-36 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
-Yildiz, Baris, Martin Savelsbergh. 2019. Provably high-quality solutions for the meal delivery routing
-problem. Transportation Science53(5) 1372–1388.
-Zhu, Shengda, Michael GH Bell, Veronica Schulz, Michael Stokoe. 2023. Co-modality in city logistics:
-Sounds good, but how?Transportation Research Part A: Policy and Practice168 103578.

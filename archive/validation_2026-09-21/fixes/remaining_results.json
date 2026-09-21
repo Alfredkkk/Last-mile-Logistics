@@ -1,0 +1,153 @@
+[
+  {
+    "issue": "A5",
+    "file": "experiment.ipynb",
+    "step_min": 0.5,
+    "counted_ride": 0.0,
+    "counted_delivery": 0.5,
+    "ride_reward": 0.03437500074505806
+  },
+  {
+    "issue": "B2",
+    "file": "experiment.ipynb",
+    "identical_observations": true,
+    "different_next_rewards": [
+      0.03437500074505806,
+      0.0653125
+    ]
+  },
+  {
+    "issue": "B1",
+    "file": "experiment.ipynb",
+    "unconditional_reset": true,
+    "maximum_sampled_episode_min": 4096.0,
+    "evaluation_horizon_min": 5760.0
+  },
+  {
+    "issue": "B5",
+    "file": "experiment.ipynb",
+    "alpha_values": [
+      0.25,
+      0.4
+    ],
+    "identical_200_steps": true,
+    "maximum_visible_distance": 0.95,
+    "saturation_alpha": 0.2442732516826255
+  },
+  {
+    "issue": "A8",
+    "file": "experiment.ipynb",
+    "model_updates": 7,
+    "metrics_update": 5,
+    "validation": "Actual trainer control flow; training/evaluation collaborators stubbed"
+  },
+  {
+    "issue": "A5",
+    "file": "NonStationary/experiment2.ipynb",
+    "step_min": 0.5,
+    "counted_ride": 0.0,
+    "counted_delivery": 0.5,
+    "ride_reward": 0.03437500074505806
+  },
+  {
+    "issue": "B2",
+    "file": "NonStationary/experiment2.ipynb",
+    "identical_observations": true,
+    "different_next_rewards": [
+      0.03437500074505806,
+      0.0653125
+    ]
+  },
+  {
+    "issue": "B1",
+    "file": "NonStationary/experiment2.ipynb",
+    "unconditional_reset": true,
+    "maximum_sampled_episode_min": 4096.0,
+    "evaluation_horizon_min": 5760.0
+  },
+  {
+    "issue": "B5",
+    "file": "NonStationary/experiment2.ipynb",
+    "alpha_values": [
+      0.25,
+      0.4
+    ],
+    "identical_200_steps": true,
+    "maximum_visible_distance": 0.95,
+    "saturation_alpha": 0.2442732516826255
+  },
+  {
+    "issue": "A9",
+    "file": "NonStationary/experiment2.ipynb",
+    "custom_profile_preserved": false
+  },
+  {
+    "issue": "A8",
+    "file": "NonStationary/experiment2.ipynb",
+    "model_updates": 7,
+    "metrics_update": 5,
+    "validation": "Actual trainer control flow; training/evaluation collaborators stubbed"
+  },
+  {
+    "issue": "A6",
+    "file": "analysis.ipynb",
+    "actual_mapping": [
+      {
+        "GAMMA_PACK": 0.33,
+        "n_est": 19.965,
+        "n_round": 30.0
+      },
+      {
+        "GAMMA_PACK": 0.5,
+        "n_est": 30.25,
+        "n_round": 30.0
+      },
+      {
+        "GAMMA_PACK": 0.67,
+        "n_est": 40.535000000000004,
+        "n_round": 50.0
+      },
+      {
+        "GAMMA_PACK": 0.83,
+        "n_est": 50.214999999999996,
+        "n_round": 50.0
+      },
+      {
+        "GAMMA_PACK": 1.0,
+        "n_est": 60.5,
+        "n_round": 50.0
+      }
+    ]
+  },
+  {
+    "issue": "A6",
+    "file": "NonStationary/analysis2.ipynb",
+    "actual_mapping": [
+      {
+        "GAMMA_PACK": 0.33,
+        "n_est": 19.965,
+        "n_round": 30.0
+      },
+      {
+        "GAMMA_PACK": 0.5,
+        "n_est": 30.25,
+        "n_round": 30.0
+      },
+      {
+        "GAMMA_PACK": 0.67,
+        "n_est": 40.535000000000004,
+        "n_round": 50.0
+      },
+      {
+        "GAMMA_PACK": 0.83,
+        "n_est": 50.214999999999996,
+        "n_round": 50.0
+      },
+      {
+        "GAMMA_PACK": 1.0,
+        "n_est": 60.5,
+        "n_round": 50.0
+      }
+    ]
+  }
+]

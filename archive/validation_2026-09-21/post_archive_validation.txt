@@ -1,0 +1,14 @@
+Archived test discovery: 53 cases.
+test_all_four_notebook_bootstraps_and_result_literals_from_both_working_directories (test_paths_runid.DirectoryTests.test_all_four_notebook_bootstraps_and_result_literals_from_both_working_directories) ... ok
+test_nonstationary_demand_cell_uses_cache_without_raw_data_or_pyarrow_import (test_paths_runid.DirectoryTests.test_nonstationary_demand_cell_uses_cache_without_raw_data_or_pyarrow_import) ... ok
+test_uber_discovery_skips_empty_directories_and_relative_override_is_rooted (test_paths_runid.DirectoryTests.test_uber_discovery_skips_empty_directories_and_relative_override_is_rooted) ... ok
+test_actual_sweep_defaults_identify_all_artifacts_and_resume_preserves_identity (test_paths_runid.RunIdentityTests.test_actual_sweep_defaults_identify_all_artifacts_and_resume_preserves_identity) ... ok
+test_alpha_summary_keeps_independent_runs_separate (test_paths_runid.RunIdentityTests.test_alpha_summary_keeps_independent_runs_separate) ... ok
+test_both_convergence_cells_plot_only_the_selected_run_group (test_paths_runid.RunIdentityTests.test_both_convergence_cells_plot_only_the_selected_run_group) ... ok
+test_log_selection_is_explicit_and_never_falls_back_to_historical_common_log (test_paths_runid.RunIdentityTests.test_log_selection_is_explicit_and_never_falls_back_to_historical_common_log) ... ok
+test_standalone_repeated_training_same_seed_has_distinct_ids_and_cannot_be_blended (test_paths_runid.RunIdentityTests.test_standalone_repeated_training_same_seed_has_distinct_ids_and_cannot_be_blended) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.700s
+
+OK

@@ -1,0 +1,108 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 45
+where ψ0(λ) = ∑3
+i=1(1−exp(−(4−i)α2λt0/4)). Then bothψ0(λ) and c1(α) increase inλ. Therefore,
+RFZ (n,λ) can be also written as
+RFZ (n,λ) =v nrp/R +rth1(λ)
+β√n−4β
+√
+1/n +h1(λ) +h2(λ),
+where h1(λ) =ψ0(λ)c1(α), h2(λ) =ψ0(λ)((α2−c3) +c2/√n) + 3c3.
+Taking derivative with respect toλ, we have
+∂RFZ (n,λ)
+∂λ =vrth′
+1(λ)(β√n−4β
+√
+1/n +h1(λ) +h2(λ))−(nrp/R +rth1(λ))(h′
+1(λ) +h′
+2(λ))
+(β√n−4β
+√
+1/n +h1(λ) +h2(λ))2 .
+Note that
+rth′
+1(λ)(β√n−4β
+√
+1/n +h1(λ) +h2(λ))−(nrp/R +rth1(λ))(h′
+1(λ) +h′
+2(λ))
+=rth′
+1(λ)(β√n−4β
+√
+1/n +h2(λ))−(nrp/R +rth1(λ))h′
+2(λ)−nrph′
+1(λ)/R
+=rth′
+1(λ)(β√n−4β
+√
+1/n +h2(λ))−nrp/R(h′
+1(λ) +h′
+2(λ))−rth1(λ)h′
+2(λ)
+=rtc1(α)ψ′
+0(λ)(β√n−4β
+√
+1/n +ψ0(λ)((α2−c3) +c2/√n) + 3c3)
+−(nrp/R)(c1(α) + (α2−c3) +c2/√n)ψ′
+0(λ)−rtc1(α)ψ0(λ)ψ′
+0(λ)((α2−c3) +c2/√n)
+=ψ′
+0(λ)
+(
+rtc1(α)(β√n−4β
+√
+1/n + 3c3)−nrp/R(c1(α) + (α2−c3) +c2/√n)
+)
+.
+Therefore, ∂RFZ (n,λ)
+∂λ is positive if and only if
+rtc1(α)(β√n−4β
+√
+1/n + 3c3)≥nrp/R(c1(α) + (α2−c3) +c2/√n)
+⇔(c1(α) + (α2−c3))rp
+Rn +
+(
+c2
+rp
+R−rtc1(α)β(1−4/n)
+)√n−3rtc1(α)c3≤0.
+Thus, we reach the conclusion that for any fixedn> 0, RM(n,λ) is either increasing or decreasing in
+λ. Note that
+(c1(α) + (α2−c3))rp
+Rn +
+(
+c2
+rp
+R−rtc1(α)β(1−4/n)
+)√n−3rtc1(α)c3
+≤(c1(α) + (α2−c3))rp
+Rn +c2
+rp
+R
+√n−3rtc1(α)c3. (13)
+Let
+˜n1 =
+−c2
+rp
+R +
+√
+(c2
+rp
+R )2 + 12 (c1(α) + (α2−c3))rtc1(α)c3
+2 (c1(α) + (α2−c3)) .
+When 0≤n≤˜n1, it holds that(13)≤0, which implies that the derivative is positive. Thus,RM(n,λ)
+is increasing inλwhen n≤˜n1.
+On the other hand,
+(c1(α) + (α2−c3))rp
+Rn +
+(
+c2
+rp
+R−rtc1(α)β(1−4/n)
+)√n−3rtc1(α)c3
+≥(c1(α) + (α2−c3))rp
+Rn +
+(
+c2
+rp
+R−rtc1(α)β
+)√n−3rtc1(α)c3. (14)

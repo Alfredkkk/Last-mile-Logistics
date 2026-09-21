@@ -1,0 +1,71 @@
+52 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+2
+ 1
+ 0 1 2 3 4 5
+t
+5
+0
+5
+10
+15
+20
+g(t)
+Figure 18 Scenario (II) ofg(t).
+If βRC1κrt/rp +β−C3ς∞−κC2
+2< 0, i.e.,
+ω= rt
+rp
+<C2
+2 +C3ς∞/κ−β/κ
+βRC1
+=:η2,
+then fλ(1)≥fλ(n) for alln. Otherwise,
+fλ(n)≥fλ(1) if and only ifn≤
+[βRC1rt/rp +β/κ−(C3ς∞/κ+C2
+2)
+C1
+2
+]2
+=:n2(ω).
+Lastly,we compare the revenue rate ofN = 4 and N = 1 (pure delivery policy).From Proposition 3,
+fλ(4)≥fλ(1) if and only if
+nrp/R +C1rtψ1(λ,4)
+β√n−4β/√n +C2ψ1(λ,4) +C3 ¯ψ2(λ,4)≥
+√nrp
+βR
+⇔ nrp/R +C1rt·4κ
+β√n−4β/√n + (C1
+2 +C2
+2/√n)·4κ+C3·2ς∞
+≥
+√nrp
+βR
+⇔−4βrp + 4C1
+2κrp
+√n + 4C2
+2κrp + 2C3ς∞
+√nrp≤4C1κrtβR
+⇔(2C1
+2κ+C3ς∞)√n + 2C2
+2κ≤2C1κβRrt/rp + 2β
+Thus, if
+ω= rt
+rp
+≤C2
+2−β/κ
+C1βR =:η3
+then fλ(4)≤fλ(1) for all number of packages. If
+ω= rt
+rp
+≥C2
+2−β/κ
+C1βR =η3,
+fλ(4)≥fλ(1) if and only ifn≤n3(ω) where
+n3(ω) =
+[2C1κβRrt/rp + 2β−2C2
+2κ
+2C1
+2κ+C3ς∞
+]2
+.
+Therefore, we conclude that

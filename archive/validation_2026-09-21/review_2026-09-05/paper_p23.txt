@@ -1,0 +1,56 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 23
+Corollary 1. For allN≥N0 whereN0≥1, it holds that
+exp(α2λt0/N0)
+(
+1−erf(
+√
+α2λt0/N0)
+erf(√α2λt0)
+)
+≤ςN
+ς∞
+≤1.
+Corollary 1 implies that¯ψ2(λ,N) can serve as a valid bound forψ2(λ,N) and it is asymptotically
+tight for largeN. This motivates a lower bound function for the expected revenue rate as
+fλ(N) :=v nrp/R +C1rtψ1(λ,N)
+β√n−βN/√n +C2ψ1(λ,N) +C3 ¯ψ2(λ,N) = v(nrp/R +C1rtκN)
+β√n−βN/√n +C2κN+C3ς∞
+√
+N
+≤fλ(N),
+where we replaceψ2(λ,N) by ¯ψ2(λ,N). According to Corollary 1,fλ(N) is an asymptotically tight
+bound forfλ(N) as N becomes large, i.e.,
+lim inf
+N→∞
+fλ(N)
+fλ(N) = 1.
+We now analyze the structural properties offλ(N), which can shed light on the revenue performance
+of the optimal zoning policy.
+Proposition 5. There exists a thresholdN ∆ such that the expected revenue functionfλ(N) is
+decreasing forN≤N ∆ and increasing forN≥N ∆.
+Proposition 5 suggests thatfλ(N) is unimodal, and its maximum can only be taken on the boundary
+(while it has a unique minimum). The intuition is as follows. Note thatfλ(N) can be rewritten as
+fλ(N) = r1 +r2N
+d1 +d2N +d3
+√
+N
+where r2N and d2N +d3
+√
+N denote the extra revenue and time cost associated with coordinating
+delivery jobs and on-demand ride requests, respectively. Both the additional revenue and the time
+cost increase withN because more zones imply more ride opportunities. Then, whether having more
+zones is beneficial hinges on the extra revenue rate from coordination,r2N/(d2N +d3
+√
+N), relative
+to that from pure delivery (r1/d1). Note thatr2N/(d2N +d3
+√
+N) is also increasing inN due to the
+economics of scale in inter-zone traveling. It follows that whenN is small, the additional revenue rate
+from coordination can be lower than that of pure delivery, and increasingN would drag down the
+total revenue rate. AsN grows large enough, the extra revenue rate surpasses the revenue rate of
+pure delivery and pushes the overall revenue rate to edge higher. The unimodal behavior underscores
+the tension between delivery consolidation (that favors smallerN) and ride-hailing flexibility (that
+favors largerN).
+Based on Proposition 5, we characterize the optimalN∗∈{1, 4,...,n}that maximizesfλ(N). For
+ease of notation, we letωdenote the ratio of ride-hailing and package delivery revenue rates, i.e.,
+ω=rt/rp.

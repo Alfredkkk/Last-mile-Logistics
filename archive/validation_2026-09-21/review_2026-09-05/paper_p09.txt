@@ -1,0 +1,34 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 9
+The uncertainty of passenger ride requests poses a major challenge to the efficient coordination of
+the two types of jobs. While the driver can follow a predetermined route for package delivery (e.g.,
+using a TSP solution), the presence of random pickup and drop-off locations causes unavoidable
+detours and requires trading off the route efficiency and the uplift of revenue carefully. This problem
+may be modeled as a dynamic program, where the state consists of the locations of all undelivered
+packages as well as the passenger’s pick-up and drop-off points. This general formulation does not
+impose restrictions on the driver’s visit sequence through the package locations (e.g., no need to
+adhere to the original TSP tour), and tracking each package’s exact location is essential because the
+spatial distribution of packages affects the future coordination policy. The resulting formulation is
+difficult to analyze because (i) the state space is high given the number of package locations; (ii) the
+acceptance policy (of on-demand rides) needs to be state-dependent. This motivates us to seek a
+tractable coordination policy with performance guarantees.
+In the next subsection, we propose a novel zoning-based coordination policy that facilitates the
+assessment of the value of joint package delivery and on-demand rides.
+2.2. A Zoning-Based Coordination Policy
+Under this policy, the entire service region is partitioned intoN zones (subregions). We considerN =k2
+fork∈{m∈N+|1≤m≤√n}, so the zones are of the same size, and they are evenly distributed across
+the service region. We note that this is mainly for ease of analysis because the partition for a general
+number of zones does not yield a clear characterization. To simplify the analysis but without loss of
+generality, we further assume that each zone contains the same number of packages, i.e.,n/N. We note
+that this is mainly a technical assumption, and when the package distribution exhibits more variability,
+our result can serve as a first-order approximation for analyzing the policy performance. Moving
+beyond the uniform distribution, the design of the partition can adapt to spatially heterogeneous
+package demand and ride arrivals, using techniques from Ouyang (2007); Carlsson et al. (2024). We
+provide examples of such partitions in Appendix A. Within each zone, the driver follows the optimal
+route through the package delivery locations; the driver also incurs additional connecting trips to
+travel between different zones.
+Without on-demand rides, the above zoning algorithm has claimed both theoretical and practical
+significance for solving TSPs. The seminal work of Karp (1977) shows that zoning algorithms enjoy
+a relative error ofO((n/N)−1/2) in approximating the optimal TSP length. Moreover, they yield
+near-optimal performance when combined with other TSP heuristics. In practice, zoning algorithms
+are often preferable because of their interpretability and ease of implementation. Based on an extensive
+analysis of Amazon’s delivery routes, Arslan and Abay (2021) observe that the majority of Amazon

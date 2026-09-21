@@ -1,0 +1,40 @@
+24 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+Theorem 1. N∗satisfies (a)N∗∈{1, 4,n}and (b) there exist constantsη1, η2, η3, n1(ω), n2(ω),
+and n3(ω) (that may also depend onλ) such that
+(I) N∗= 1 when both (I.a) eitherω≤η2 or n≥n2(ω), and (I.b) eitherω≤η3 or n≥n3(ω) are
+satisfied.
+(II) N∗= 4 when both (II.a) eitherω≤η1 or n≥n1(ω), and (II.b)ω≥η3 and n≤n3(ω) are
+satisfied.
+(III) N∗=n when (III.a)ω≥max{η1,η2}and (III.b)n≤min{n1(ω),n 3(ω)}.
+Theorem 1 indicates that the lower bound functionfλ(N) has a simple optimal solution structure,
+e.g., the zoning policy that attains the highestfλ(N) is the pure delivery policy, four-zone policy, or
+the switching policy. Therefore, the optimal expected revenue rate under the zoning policy satisfies
+R∗(n,λ)≥max
+{
+fλ(1),f λ(4),f λ(n)
+}
+.
+Examining the form of the lower bound function further reveals thatR∗(n,λ) = Ω(√n) for any fixed
+λ. This implies that the optimal zoning policy would achieve (at least) asymptotically the same
+economies of scale as the pure delivery policy with respect to package density. The main reason
+lies in the fact that passenger rides are point-to-point trips that can not be pooled in a TSP tour.
+Nevertheless, the value of coordination can be manifested in the scaling constants that decide the
+marginal improvement of the revenue rate. Notably, the above result implies that the potential revenue
+improvement of co-modality against pure delivery is at least
+R∗(n,λ)
+RPD (n,λ)≥fλ(n)
+RPD (n,λ) = β(rp +C1rtκR)
+rp(C2κ√n +C3ς∞),
+where the dependence onλis implicitly captured inκ. We see that the relative revenue improvement
+tends to be higher for a smallern, so the value of coordination can be very significant for crowdsourced
+drivers with a limited vehicle capacity.
+Next, we investigate the properties of the optimal zoning policy as characterized byN∗. Because
+fλ(N) is asymptotically tight, the expected revenue rate would followfλ(N) closely for large values
+of N, i.e., the increasing pattern inN. WhenN is relatively small, the gap betweenfλ(N) and
+fλ(N) may render the behaviors offλ(N) and fλ(N) to diverge, e.g.,N∗may be different than
+N∗. Therefore, the optimal zoning policy may correspond toN∗/∈{1, 4,n}. Specifically, while the
+four-zone policy remains a promising choice, it can be optimal to partition the service region into
+slightly more zones. Nevertheless, such scenarios are relatively rare: we observe that only 1.18% of our
+tested cases yieldN∗/∈{1, 4,n}for all the combinations ofλ={0.5, 0.6,...,8},rt ={2, 2.1,...,10},
+and n ={25, 36,...,100}(36,936 instances in total). Notably, as shown in Corollary 2, adopting a
+zoning policy withN∗zones has a bounded performance ratio to the optimal zoning policy.

@@ -1,0 +1,84 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 49
+Proof of Proposition 5. Recall that
+ψ1(λ,N) =κN, and ¯ψ2(λ,N) =ς∞
+√
+N,
+whereκ= 1 + (exp(−ℏλ)−1)/(ℏλ) andς∞=
+√πerf(
+√
+α2λt0)√
+α2λt0
+. The derivative ofψ1 with respect toN is
+∂ψ1
+∂N=κ>0,
+and the derivative of¯ψ2 with respect toN is
+∂¯ψ2
+∂N= 1
+2ς∞N−1/2> 0.
+Since the lower bound of revenue rate of the mixed delivery policy is
+fλ(N) :=v nrp/R +C1rtψ1(λ,N)
+β√n−βN/√n +C2ψ1(λ,N) +C3 ¯ψ2(λ,N),
+the numerator of the derivative with respect toN equals
+v
+(
+C1rt
+∂ψ1
+∂N(β√n−βN/√n +C2ψ1(λ,N) +C3 ¯ψ2(λ,N))
+−(nrp/R +C1rtψ1(λ,N))
+(
+−β/√n +C2
+∂ψ1
+∂N+C3
+∂¯ψ2
+∂N
+))
+=vκ
+((
+C1rtβ√n−C2nrp/R +rp/(κR)β√n
+)
++C1C3rtς∞
+√
+N−C3
+(1
+2
+ς∞
+κnrpN−1/2/R + 1
+2C1rtς∞
+√
+N
+))
+=vκ
+(
+(C1rtβ√n−C2nrp/R +rp/(κR)β√n) + 1
+2C1C3rtς∞
+√
+N−1
+2
+ς∞C3nrp
+κR
+√
+N
+)
+. (15)
+The derivative is monotonically increasing inN. Therefore, there exists a thresholdN ∆ such that
+the lower bound of expected revenue functionfλ(N) is decreasing forN≤N ∆ and increasing for
+N≥N ∆. □
+Proof of Theorem 1.(a) From Equation(15), while the first part of the derivative is independent
+of N, the second part of the numerator of the derivative equals
+1
+2C1C3rtς∞
+√
+N−1
+2
+ς∞C3nrp
+κR
+√
+N
+.
+It is monotonically increasing inN. Therefore, whenN increases from 4 to infinity, the profit rate
+either monotonically increases, or it decreases first and then increases. Thus, the optimalN is either
+1, 4, orn.
+(b) Note that the revenue rate of pure delivery is
+RPD (n,λ) =v nrp
+β√n =v√nrp
+βR,

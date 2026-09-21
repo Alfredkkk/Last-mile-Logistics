@@ -1,0 +1,21 @@
+{
+  "phase": "failed",
+  "run_id": "20260921T145350850289Z_7aec6e97",
+  "completed_groups": 4,
+  "total_groups": 240,
+  "run_directory": "C:\\Users\\93541\\OneDrive - Georgia Institute of Technology\\GeorgiaTech\\Research\\Last-mile Logistics\\Results\\param_sweep_results_2_runs\\20260921T145350850289Z_7aec6e97",
+  "updated_at": "2026-09-21T16:17:14.334579+00:00",
+  "combo_id": 5,
+  "training": {
+    "update": 13,
+    "total_updates": 50,
+    "phase": "failed",
+    "percent": 26.0,
+    "elapsed_seconds": 270.5,
+    "eta_seconds": 769.8846153846154,
+    "updated_at": "2026-09-21T16:17:14.331579+00:00",
+    "run_id": "20260921T145350850289Z_7aec6e97",
+    "saved_update": 10
+  },
+  "error_type": "PermissionError"
+}

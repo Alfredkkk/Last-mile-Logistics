@@ -1,0 +1,49 @@
+14 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+passengers is ∑3
+i=1 exp(−(4−i)α2λt0/4)L3/v. Combining these parts, we derive the expected revenue
+rate under the four-zone policy, denoted byRFZ (n,λ), as
+v nrp + ∑3
+i=1(1−exp(−(4−i)α2λt0/4))rtL1
+β√nR−4βR/√n + ∑3
+i=1(1−exp(−(4−i)α2λt0/4))(L1 +L2) +∑3
+i=1 exp(−(4−i)α2λt0/4)L3
+.
+For ease of notation, we defineψ0(λ) = ∑3
+i=1(1−exp(−(4−i)α2λt0/4)), then the expected revenue
+rate can be simplified as
+RFZ (n,λ) =v nrp +ψ0(λ)rtc1(α)R
+β√nR−4βR/√n +ψ0(λ)((c1(α) +α2−c3)R +c2
+R√n) + 3c3R. (3)
+We first analyze the properties ofRFZ (n,λ) and delineate its relationship withn and λ.
+Proposition 2. RFZ (n,λ) satisfies
+(I) For any fixed package numbern> 0,RFZ (n,λ) is either increasing or decreasing inλ. Moreover,
+there exist two constants˜n1 and ˜n2 such thatRFZ (n,λ) is increasing inλwhen n≤˜n1 and
+decreasing inλwhen n≥˜n2.
+(II) For any fixedλ>0, there exists a threshold¯n(λ) such thatRFZ (n,λ) is increasing inn when
+n≥¯n(λ).
+When n is small, the expected revenue rate from package delivery is low, so a higher passenger
+arrival rate boosts the chance of earning from on-demand rides and the overall revenue rate. On the
+other hand, whenn is large, package delivery is more profitable than on-demand rides, because the
+latter incurs additional pickup/drop-off distance that drags down the revenue performance. Observe
+that the expected revenue rate from on-demand rides is bounded by a constant, whereas package
+delivery achieves an expected revenue rate that scales with√n. Proposition 2 also implies that
+RFZ (n,λ) is not necessarily monotonic inn. This can be attributed to the termβ
+√
+nA+ψ0(λ)c2R/√n
+in the denominator of the revenue rate function, whereψ0(λ)c2R/√n captures the synergy between
+package delivery and ride-hailing. Whenn is small and the package delivery revenue is negligible
+compared to on-demand rides, the synergy effect plays a major role in driving the revenue; whenn is
+larger, the TSP travel distanceβ
+√
+nA starts to overshadow the synergy effect, causing the revenue to
+decline. Asn becomes large enough, the expected revenue rate is mainly driven by package delivery
+and scales with√n.
+Next, we compare the expected revenue rate of the four-zone policy with the pure package delivery
+policy. We characterize the conditions under which the four-zone policy yields a higher revenue rate.
+Proposition 3. The four-zone policy can outperform the pure package delivery policy for some(n,λ)
+if and only ifψ0(λ)(βrtc1(α)R−rpc2) + 4βrpR> 0 and
+n<
+[ψ0(λ)(βRrtc1(α)−rpc2) + 4βrpR
+rp(ψ0(λ)(c1(α) +α2−c3) + 3c3)
+]2
+.

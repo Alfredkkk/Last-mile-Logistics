@@ -1,0 +1,26 @@
+{
+  "experiment.ipynb": {
+    "code_cells_parse": true,
+    "outputs_metadata_preserved": true,
+    "scenario_paths": "Results",
+    "model_logic_unchanged": true
+  },
+  "analysis.ipynb": {
+    "code_cells_parse": true,
+    "outputs_metadata_preserved": true,
+    "scenario_paths": "Results",
+    "model_logic_unchanged": false
+  },
+  "NonStationary/experiment2.ipynb": {
+    "code_cells_parse": true,
+    "outputs_metadata_preserved": true,
+    "scenario_paths": "NonStationary/Results",
+    "model_logic_unchanged": true
+  },
+  "NonStationary/analysis2.ipynb": {
+    "code_cells_parse": true,
+    "outputs_metadata_preserved": true,
+    "scenario_paths": "NonStationary/Results",
+    "model_logic_unchanged": false
+  }
+}

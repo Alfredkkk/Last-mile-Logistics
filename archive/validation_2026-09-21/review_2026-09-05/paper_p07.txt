@@ -1,0 +1,36 @@
+Cao and Liu: Coordinate Package Delivery and On-Demand Rides 7
+schedule to facilitate passenger and freight movement. Masson et al. (2017) and Azcuy et al. (2021)
+study a two-tier urban delivery system that leverages existing transit routes (bus routes or tramways)
+to move goods to intermediate transfer locations before being delivered by dedicated freight vehicles.
+However, the efficiency of such integrated systems hinges on the connectivity of transit networks,
+which may lack the capacity and investment to support its self-sufficiency (Cochrane et al., 2017).
+Closest to our setting is the stream of literature on co-modality using on-demand transportation
+vehicles. In Li et al. (2014), the authors propose a Share-a-Ride problem that dispatches taxis to
+transport people and deliver parcels at the same time. They formulate the problem as a mixed integer
+linear program (MILP) and develop several heuristics to solve the problem. This framework has been
+extended to account for practical constraints and uncertain travel times (Nguyen et al., 2015; Li et al.,
+2016). Due to the complexity of the problem, more recent studies resort to reinforcement learning
+and agent-based simulations to prescribe solutions in real-time, see, e.g., Li et al. (2022); Chen et al.
+(2023a); Fehn et al. (2023). Although these studies provide promising computational methods (or
+heuristics) and case studies, there lacks a coherent and generalizable understanding of the potential
+of co-modality in integrating package delivery jobs and on-demand passenger ride requests. Moreover,
+unlike the existing literature that assumes the delivery requests pop up along with passenger ride
+requests (so their main differences only lie in the service time constraint), we focus on the setting
+where the driver has preloaded packages with known destinations, which is common for e-commerce
+applications.
+2. Model Setup and Coordination Policy
+In this section, we introduce the basic setting for modeling package delivery and on-demand rides,
+followed by the proposed coordination policy.
+2.1. Model Setup
+We consider a driver who needs to delivern packages (on average) in a service regionA. The packages
+are preloaded from a warehouse/delivery station. Without loss of generality, we assume the service
+region is of a diamond shape with edge lengthR, in which the travel distance is measured in the
+ℓ1-distance (Manhattan distance). As a result, the points on the periphery of the service region share
+the same distance ofR/
+√
+2 from the centroid (see Figure 1), and the area of the service region is
+A =R2. Package locations are assumed to follow a homogeneous two-dimensional point process with
+rateγsuch thatn =γR2. Note that this assumption is for analytical tractability, and our coordination
+policy can work for generally distributed package locations, which will be discussed in Section 2.2.
+The driver travels with a fixed speed ofv. Each delivered package contributes a unit revenue ofrp
+to the driver. The package-based compensation scheme is adopted by the majority of crowdsourcing

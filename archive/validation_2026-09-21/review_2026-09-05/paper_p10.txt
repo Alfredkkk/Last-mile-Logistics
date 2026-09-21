@@ -1,0 +1,39 @@
+10 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+drivers visit customers in a sequence of zones and conclude that zoning is critical for improving
+delivery efficiency.
+We now describe how zoning can be extended for co-modal logistics in the presence of on-demand
+rides. During package delivery within a zone, the driver starts screening passenger rides once there
+are t0 minutes left until the completion of delivery jobs in that zone. A passenger ride is accepted if
+(i) the pickup location is within a distance ofr =αR/
+√
+2 from the final delivery location3 and (ii) the
+drop-off location is in a zone that the driver has not delivered.4 The distancer can be interpreted as
+the maximum allowable pickup distance, and the arrival rate of the admissible rides isα2λ. The driver
+will serve the accepted ride, if any, after the package deliveries are completed in the zone. Therefore,
+the screening timet0 together with pick-up distancer affect the passenger waiting time and can
+be adjusted to meet service quality constraints.5 If no rides are accepted, the driver moves to the
+next unvisited zone for package delivery following a prespecified sequencing rule. In the remainder of
+the paper, we assume the “nearest-neighbor” rule is adopted unless otherwise stated, e.g., the driver
+travels to the nearest unvisited zone for package delivery if no qualified rides are received.
+Under the zoning policy, the number of zones indicates the maximum number of on-demand rides a
+driver can accept during the package delivery process: the driver can take up toN−1 rides whenN
+zones are in place. In other words, more zones imply more flexibility for the driver to serve on-demand
+rides, which manifests the unique role of zoning in the co-modal application. Accordingly, one can
+impose additional constraints onN to satisfy work hours or labor constraints so the total expected
+delivery time is not too long. In extreme cases, ifN = 1, the driver does not take any rides, and no
+extra working hours are incurred.
+Figure 1 depicts one realization of the zoning-based coordination policy with four zones (left, top,
+right, and bottom zones). In this example, the driver starts from the left zone and first delivers
+packages within its boundary. Upon finishing all delivery jobs in the left zone, the driver accepts
+a passenger ride that ends in the top zone; after completing this ride, the driver moves to deliver
+packages there before accepting another ride to the right zone. Then, the driver makes package
+deliveries within the right zone and travels to the bottom zone (the last unvisited zone) for the
+remaining package deliveries. In this case, there are no qualified passenger rides that the driver can
+accept when delivering in the right zone. Therefore, the last segment of the trip does not reap the
+benefit of joint package delivery and ride-hailing for this realized scenario.
+3It is possible that the origin of a passenger ride request is outside the service region when the final delivery location
+is close to the region boundary. We include those requests to ease the need to treat boundary cases.
+4For example, Uber allows drivers to filter requests by the order destination; seehttps://www.uber.com/us/en/
+drive/basics/driver-destinations/.
+5Technically,t0 should be shorter than the total package delivery time in a zone, which is likely to hold for practical
+scenarios.

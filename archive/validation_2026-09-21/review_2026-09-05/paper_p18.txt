@@ -1,0 +1,35 @@
+18 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+Figure 3 Two possible realizations of visited zones whenN = 25 and i = 6: the visited zones are labeled by check
+marks. The driver’s location is denoted by a label of car.
+the expected inter-zone delivery distance by the solution to amax-min problem. To capture this
+travel distance, we consider placingK =N−i + 1pointsX ={x1,...,xK}withinA (including the
+current location) such that∑K
+k=1dk(x1,...,xK)/K is maximal, wheredk(x1,...,xK) is the shortest
+distance between xk and a point inX\ xk. Equivalently, the bounding functionG1(K) parameterized
+byK is the optimal objective function given by
+G1(K) = max
+X={x1,...,xK}⊂A
+1
+K
+K∑
+k=1
+min
+x∈X\xk
+||x−xk||. (6)
+When K = 2, G1(K) is the longest distance between a pair of points in the service region, which
+equals
+√
+2R.
+The idea behind the above formulation is to distribute the unvisited zones as sparsely as possible so
+the average distance between a zone and its nearest neighbor is maximal. Accordingly, the objective
+function of (6) serves as an upper bound for the expected inter-zone delivery distance, assuming
+every zone is equally likely to be the zone where the driver is currently located. Although the equal-
+probability distribution assumption may not be exactly satisfied under the proposed coordination
+policy due to the boundary effect, the objective function of(6) is still a good proxy for the upper
+bound, as we will show later in the numerical evaluation.
+Although problem(6) can be formulated as a mixed integer linear program (MILP) by linearizing
+the inner minimization problem with binary variables, it can not be solved efficiently even for moderate
+values ofK: the optimal solution can not be found forK≥10 on Gurobi with a time limit of six
+hours (see Appendix F.1 for the formulation and experiment setup). Next, we offer an alternative
+upper bounding problem by exploiting the connection between problem(6) and the region (square)
+covering problems (Alon and Kleitman, 1986).

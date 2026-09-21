@@ -1,0 +1,100 @@
+48 Cao and Liu: Coordinate Package Delivery and On-Demand Rides
+Proof of Lemma 2. For notation simplicity, letc =α2λt0. Define
+h(N) = exp(c/N)
+(
+erf(√c)−erf(
+√
+c/N)
+)
+.
+To prove the conclusion, we only need to show thath(N) monotonically increases inN when N≥4.
+Taking the derivative with respect toN,
+h′(N) =−cN−2 exp(c/N)
+(
+erf(√c)−erf(
+√
+c/N)
+)
++ exp(c/N)
+(
+−2√πexp(−c/N)·(−√c1
+2N−3/2)
+)
+= exp(c/N)N−2
+(
+−c
+(
+erf(√c)−erf(
+√
+c/N)
+)
++
+√c√πexp(−c/N)N 1/2
+)
+.
+Note that exp(c/N)N−2 is positive. Let
+u(N) =−c
+(
+erf(√c)−erf(
+√
+c/N)
+)
++
+√c√πexp(−c/N)N 1/2.
+Taking derivative with respect toN again,
+u′(N) = 2c√πexp(−c/N)·(−√c1
+2N−3/2) +
+√c√π
+(
+exp(−c/N)(cN−2)N 1/2 + exp(−c/N)·1
+2N−1/2
+)
+=
+√c√πexp(−c/N)N−3/2(−c + 2c + 1
+2N)≥0, ∀N≥1.
+Since u(N)> 0 for N≥1, we haveu(N)≥0 for allN≥1. Thus,h′(N)≥0 for allN≥1, which
+implies thath(N) monotonically increases forN≥1. WhenN increases from 4 to infinity, it increases
+from ζ4 to ζ∞:=
+√π·erf(
+√
+α2λt0)√
+α2λt0
+. Thus, we reach our conclusion. □
+Proof of Corollary 1. Fix anyN. Recall that
+fλ(N) :=v nrp/R +C1rtψ1(λ,N)
+β√n−βN/√n +C2ψ1(λ,N) +C3ψ2(λ,N) =v nrp/R +C1rtψ1(λ,N)
+β√n−βN/√n +C2ψ1(λ,N) +C3ςN(λ)
+√
+N
+,
+and
+fλ(N) =v nrp/R +C1rtψ1(λ,N)
+β√n−βN/√n +C2ψ1(λ,N) +C3ς∞(λ)
+√
+N
+.
+Note that
+fλ(N) =v nrp/R +C1rtψ1(λ,N)
+β√n−βN/√n +C2ψ1(λ,N) +C3ς∞(λ)
+√
+N
+=v nrp/R +C1rtψ1(λ,N)
+β√n−βN/√n +C2ψ1(λ,N) +C3ςN(λ)
+√
+N·ς∞
+ςN
+≥ςN
+ς∞
+fλ(N),
+where
+ςN
+ς∞
+= exp(α2λt0/N)·(erf(√α2λt0)−erf(
+√
+α2λt0/N))
+erf(√α2λt0)
+≥exp(α2λt0/N0)·(erf(√α2λt0)−erf(
+√
+α2λt0/N0))
+erf(√α2λt0) ,
+The last inequality holds from monotonicity ofζN in Lemma 2. □
