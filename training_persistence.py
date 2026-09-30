@@ -15,6 +15,7 @@ import sys
 import tempfile
 import time
 import uuid
+import logging
 
 import numpy as np
 import pandas as pd
@@ -70,6 +71,21 @@ def log_run_id(path):
     return new_run_id()
 
 
+def _retry_file_operation(operation):
+    """Allow transient Windows access/sharing locks to clear (up to 3.15s)."""
+    delays = (0.05, 0.1, 0.2, 0.4, 0.8, 1.6)
+    for attempt in range(len(delays) + 1):
+        try:
+            return operation()
+        except OSError as error:
+            if (not isinstance(error, PermissionError) and
+                    getattr(error, "winerror", None) not in (5, 32, 33)):
+                raise
+            if attempt == len(delays):
+                raise
+            time.sleep(delays[attempt])
+
+
 def atomic_write(path, writer):
     """Replace one completed file; a failed write leaves its previous version intact."""
     path = Path(path)
@@ -80,15 +96,38 @@ def atomic_write(path, writer):
             writer(stream)
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(name, path)
+        _retry_file_operation(lambda: os.replace(name, path))
     finally:
         if os.path.exists(name):
-            os.unlink(name)
+            try:
+                _retry_file_operation(lambda: os.unlink(name))
+            except OSError:
+                # Cleanup must not obscure the original save failure.
+                logging.getLogger(__name__).warning("Could not remove temporary file: %s", name)
 
 
 def atomic_json(path, data):
     atomic_write(path, lambda stream: stream.write(
         json.dumps(_jsonable(data), ensure_ascii=False, indent=2).encode("utf-8")))
+
+
+_progress_write_failures = set()
+
+
+def write_progress_json(path, data):
+    """Progress is advisory; checkpoints and results still use strict writes."""
+    path = Path(path)
+    try:
+        atomic_json(path, data)
+    except OSError as error:
+        if path not in _progress_write_failures:
+            logging.getLogger(__name__).warning(
+                "Progress file was not updated; training continues. Status on disk may be stale: %s (%s)",
+                path, error)
+        _progress_write_failures.add(path)
+        return False
+    _progress_write_failures.discard(path)
+    return True
 
 
 def atomic_csv(path, frame):
@@ -234,7 +273,7 @@ class TrainingProgress:
         if saved_update is not None:
             status["saved_update"] = saved_update
         if self.path:
-            atomic_json(self.path, status)
+            write_progress_json(self.path, status)
         if self.callback:
             self.callback(status)
         if self.bar is not None:
@@ -292,7 +331,7 @@ class SweepStore:
         self.progress.update(dict(
             phase=phase, run_id=self.run_id, completed_groups=len(self.completed), total_groups=len(self.plan),
             run_directory=str(self.directory), updated_at=datetime.now(timezone.utc).isoformat(), **extra))
-        atomic_json(self.directory / "progress.json", self.progress)
+        write_progress_json(self.directory / "progress.json", self.progress)
 
     def commit(self, combo_id, rows):
         if combo_id in self.completed:
