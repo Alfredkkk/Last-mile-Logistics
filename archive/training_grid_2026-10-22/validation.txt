@@ -1,0 +1,25 @@
+Training-grid plot validation, 2026-10-22/23
+
+Staged sources:
+- Added read_grid_training_curve to project_paths.py; existing selector/reader unchanged.
+- Both analysis notebooks: initialization import and convergence cell only.
+- All other cells including saved outputs, notebook metadata, and evaluation points/smoothing preserved.
+- Progress log appended with aggregation scope and limitations.
+
+Executed both real convergence cells against existing experiment logs and rendered both figures.
+Stationary: run 20260921T213417946637Z_9d5e65dd; 240 settings; 50 common updates.
+Nonstationary: run 20260927T095930443635Z_577f21e5; 180 settings; 40 common updates.
+All current logs use train_seed=42 and REPORT_UNSCALED=True.
+Training values independently match direct per-update averages of all train rows.
+Evaluation raw points and rolling(3) values match the previous cell exactly.
+Visually inspected both training figures: readable axes, titles and legends, no clipping.
+
+Five test cases passed (2.830 seconds):
+1. Current runs vs independent direct means.
+2. Equal effective-setting weights with unequal seed counts and alpha alias counts.
+3. Missing late updates do not change the averaging denominator.
+4. Missing whole groups / header-only logs do not produce misleading full-grid curves.
+5. Duplicate rows, foreign identities, wrong seeds/parameters/units and non-finite rates are rejected.
+
+Initial sandbox test attempt could not access Windows' temporary directories; the same tests passed after authorized execution outside the sandbox.
+No PPO training, simulation, checkpoint changes, or result CSV rewriting performed.

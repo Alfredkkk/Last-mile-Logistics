@@ -1,0 +1,42 @@
+{
+  "stationary": {
+    "coverage": {
+      "run_id": "20260921T213417946637Z_9d5e65dd",
+      "planned_groups": 240,
+      "logged_groups": 240,
+      "effective_settings": 240,
+      "train_seeds": [
+        42
+      ],
+      "missing_groups": [],
+      "common_updates": 50,
+      "observed_updates": 50,
+      "report_unscaled": true
+    },
+    "first": 0.7096231915056705,
+    "last": 0.7286961294710637,
+    "evaluation_group": 240,
+    "evaluation_points": 10,
+    "evaluation_unchanged": true
+  },
+  "nonstationary": {
+    "coverage": {
+      "run_id": "20260927T095930443635Z_577f21e5",
+      "planned_groups": 180,
+      "logged_groups": 180,
+      "effective_settings": 180,
+      "train_seeds": [
+        42
+      ],
+      "missing_groups": [],
+      "common_updates": 40,
+      "observed_updates": 40,
+      "report_unscaled": true
+    },
+    "first": 0.6731331007348167,
+    "last": 0.6860503410299619,
+    "evaluation_group": 180,
+    "evaluation_points": 8,
+    "evaluation_unchanged": true
+  }
+}

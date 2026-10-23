@@ -1,4 +1,4 @@
-"""Project-rooted paths and explicit single-run convergence-log selection."""
+"""Project-rooted paths and identified training-curve selection and aggregation."""
 import json
 import os
 from pathlib import Path
@@ -131,3 +131,85 @@ def read_run_training_log(path, *, run_id=None, combo_id=None):
     if frame.duplicated(["run_id", "combo_id", "train_seed", "kind", "update"]).any():
         raise ValueError("Duplicate update records found; refusing to average repeated training rows")
     return frame.sort_values(["update", "kind"]).reset_index(drop=True)
+
+
+def read_grid_training_curve(run_dir):
+    """Mean rollout rate over a run's full effective grid at common updates.
+
+    Average seeds within each effective setting, then settings equally. Alpha
+    aliases are not additional settings. Missing groups/updates are never filled
+    or silently dropped from the denominator. Returns (curve, coverage).
+    """
+    import numpy as np
+
+    directory = Path(run_dir).resolve()
+    manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
+    identity = manifest.get("run_id")
+    plan = pd.DataFrame(manifest.get("plan", []))
+    setting_columns = ["LAMBDA", "GAMMA_PACK", "ALPHA_EFFECTIVE", "RIDE_TTL_MIN",
+                       "MAX_VISIBLE_RIDES", "SWITCH_GRACE_STEPS", "RT", "R", "V", "DT"]
+    required = ["combo_id", "train_seed", *setting_columns]
+    if not identity or plan.empty or not set(required).issubset(plan):
+        raise ValueError("A full-grid curve requires an identified run and its complete sweep plan")
+    if plan[required].isna().any().any() or plan.combo_id.duplicated().any():
+        raise ValueError("Sweep plan contains missing values or duplicate group IDs")
+    if plan.duplicated(setting_columns + ["train_seed"]).any():
+        raise ValueError("Sweep plan repeats the same effective setting and training seed")
+    plan = plan.copy()
+    plan["setting_id"] = plan.groupby(setting_columns, sort=False).ngroup()
+    expected = set(plan.combo_id)
+    unexpected = [p.parent.name for p in directory.glob("combo_*/training_log.csv")
+                  if int(p.parent.name.removeprefix("combo_")) not in expected]
+    if unexpected:
+        raise ValueError(f"Training logs outside the selected sweep plan: {unexpected}")
+
+    frames, missing = [], []
+    for row in plan.to_dict("records"):
+        group = int(row["combo_id"])
+        path = directory / f"combo_{group:04d}" / "training_log.csv"
+        if not path.is_file() or path.stat().st_size == 0:
+            missing.append(group)
+            continue
+        # Header-only logs are normal for a newly started group.
+        if pd.read_csv(path, nrows=1).empty:
+            missing.append(group)
+            continue
+        frame = read_run_training_log(path)  # validate all rows before selection
+        if (frame.run_id.iloc[0] != identity or frame.combo_id.iloc[0] != group
+                or frame.train_seed.iloc[0] != row["train_seed"]):
+            raise ValueError(f"Training log identity does not match its sweep plan: {path}")
+        for column in setting_columns:
+            if column not in frame or not np.isclose(
+                    pd.to_numeric(frame[column], errors="raise"), row[column],
+                    rtol=1e-10, atol=1e-12).all():
+                raise ValueError(f"Training log {column} does not match its sweep plan: {path}")
+        expected_units = str(manifest["settings"]["REPORT_UNSCALED"]).lower()
+        if ("REPORT_UNSCALED" not in frame or
+                not frame.REPORT_UNSCALED.astype(str).str.lower().eq(expected_units).all()):
+            raise ValueError(f"Training log reporting units do not match its run: {path}")
+        train = frame.loc[frame.kind == "train", ["update", "step_avg_rate"]].copy()
+        if train.empty:
+            missing.append(group)
+            continue
+        train["step_avg_rate"] = pd.to_numeric(train.step_avg_rate, errors="raise")
+        if not np.isfinite(train.step_avg_rate).all():
+            raise ValueError(f"Training log contains non-finite rollout rates: {path}")
+        train["combo_id"], train["setting_id"] = group, row["setting_id"]
+        frames.append(train)
+
+    coverage = dict(run_id=identity, planned_groups=len(plan), logged_groups=len(frames),
+                    effective_settings=plan.setting_id.nunique(),
+                    train_seeds=sorted(plan.train_seed.unique().tolist()),
+                    missing_groups=missing, common_updates=0, observed_updates=0,
+                    report_unscaled=manifest["settings"]["REPORT_UNSCALED"])
+    curve = pd.DataFrame(columns=["update", "step_avg_rate"])
+    if frames:
+        training = pd.concat(frames, ignore_index=True)
+        counts = training.groupby("update").combo_id.nunique()
+        common = counts.index[counts == len(plan)]
+        coverage.update(common_updates=len(common), observed_updates=len(counts))
+        if len(common):
+            per_setting = (training[training["update"].isin(common)]
+                           .groupby(["update", "setting_id"]).step_avg_rate.mean())
+            curve = per_setting.groupby("update").mean().reset_index()
+    return curve, coverage

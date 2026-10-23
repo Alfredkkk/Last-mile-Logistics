@@ -1,0 +1,47 @@
+# Training: the full effective parameter grid of one identified run.
+# Evaluation: one group from that same run; None selects the latest logged group.
+ANALYSIS_RUN_ID = None
+ANALYSIS_COMBO_ID = None  # affects evaluation only, never the training-grid mean
+ANALYSIS_RUN_DIR = None  # optional absolute path to a particular saved run
+
+log_path, selected_run_id, selected_combo_id = select_training_log(
+    CSV_PATH, run_id=ANALYSIS_RUN_ID, combo_id=ANALYSIS_COMBO_ID, run_dir=ANALYSIS_RUN_DIR)
+df = read_run_training_log(log_path, run_id=selected_run_id, combo_id=selected_combo_id)
+training_curve, coverage = read_grid_training_curve(log_path.parent.parent)
+print(f"Run: {selected_run_id}\nTraining: {coverage['effective_settings']} effective settings, "
+      f"{coverage['logged_groups']}/{coverage['planned_groups']} group logs, "
+      f"training seeds={coverage['train_seeds']}; "
+      f"{coverage['common_updates']}/{coverage['observed_updates']} updates cover the entire grid.")
+print(f"Evaluation: group {selected_combo_id}, train_seed={df['train_seed'].iloc[0]}\nLog: {log_path}")
+print("Training averages seeds within each effective setting, then settings equally. "
+      "Evaluation shows one group; the two levels are not directly comparable.")
+if coverage['missing_groups']:
+    print(f"Groups without training data: {coverage['missing_groups']}")
+if training_curve.empty:
+    print("Full-grid training curve unavailable: no update has data from every planned group yet.")
+
+units = 'Revenue rate (per minute)'
+if not coverage['report_unscaled']:
+    units = 'Revenue rate (scaled, per minute)'
+evaluation_curve = df.loc[df['kind'] == 'eval', ['update', 'rate']].sort_values('update').copy()
+curves = [
+    (training_curve, 'step_avg_rate', 'Grid mean',
+     f"DRL training: full-grid mean ({coverage['effective_settings']} settings)"),
+    (evaluation_curve, 'rate', 'Evaluation',
+     f'DRL evaluation: group {selected_combo_id}'),
+]
+for curve, column, label, title in curves:
+    if curve.empty:
+        continue
+    curve = curve.copy()
+    curve['smooth'] = curve[column].rolling(window=3, min_periods=1).mean()
+    plt.figure(figsize=(6, 4))
+    plt.plot(curve['update'], curve[column], marker='o', alpha=0.4, label=label)
+    plt.plot(curve['update'], curve['smooth'], linewidth=2, label='Rolling mean (3 points)')
+    plt.xlabel('PPO update')
+    plt.ylabel(units)
+    plt.title(title)
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
