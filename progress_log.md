@@ -370,3 +370,12 @@ This file records code changes, experiment adjustments, and analysis updates for
 - ANALYSIS_RUN_ID / ANALYSIS_RUN_DIR select the run; ANALYSIS_COMBO_ID affects evaluation only. Evaluation retains the previous selected-group data and three-point smoothing, with clearer labels. Training and evaluation therefore have different aggregation scopes and their levels are not a generalization-gap comparison.
 - Regenerated only the convergence-cell outputs from existing data: stationary 240 settings x 50 updates, nonstationary 180 settings x 40 updates, each with training seed 42. Evaluation values and all other notebook cells/outputs are unchanged. No training, simulation, reward, result CSV, or checkpoint changes.
 - Validation and before snapshots are archived under archive/training_grid_2026-10-22. Current runs all use REPORT_UNSCALED=True. The previously identified logger/label issue for REPORT_UNSCALED=False is outside this plotting change.
+
+
+## 2026-10-29 Switching Windows and Package-First Reservations
+
+- Implemented the user's approved HEUR/HEUR_VOR changes in both stationary and non-stationary notebooks. Retained the existing one-step pre-grace trigger, full post-delivery grace reset, and movement toward the next package when unmatched.
+- Fixed each screening window to its associated package address; completing a subsequent package starts that package's window. Pre-grace requests are accepted once, held beyond their display TTL, and served only after the locked package finishes, using the existing reservation APIs.
+- Shared one switching runner across both wrappers. HEUR_VOR also excludes the soon-to-be-completed origin cell; pickup/passenger travel cannot open or consume windows. Post-window requests are committed by identity to avoid resolving an index against the next package's visible list.
+- Preserved all other notebook cells, stored outputs and metadata, including current results. DRL/environment dynamics, PPO, FOUR_ZONE, reward, horizon, analysis aggregation and historical logs/checkpoints were not changed. Evaluation results for the corrected heuristics must be regenerated in a new run; do not resume old committed baseline results as though they used this version.
+- Added deterministic behavior regressions and smoke checks under archive/switching_update_2026-10-29; see validation.txt for executed checks and outcomes. No full parameter sweep or PPO retraining was started.

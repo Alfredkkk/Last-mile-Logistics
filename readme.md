@@ -73,13 +73,13 @@ Uber data discovery prefers directories containing `fhvhv_tripdata_2021-*.parque
 
 ### Request visibility & TTL
 - **Visible rides** must satisfy both:
-  1) **Pickup within radius** $r_{\text{pick}}=\alpha \cdot \frac{R}{\sqrt 2}$ (`R_PICK_ALPHA = α`) of the current delivery target, not the vehicle's current position.
-  2) **Additional ETA filter**: ETA from that delivery target to pickup $\le$ remaining display TTL. This does not guarantee an actual pickup deadline.
+  1) **Pickup within radius** $r_{\text{pick}}=\alpha \cdot \frac{R}{\sqrt 2}$ (`R_PICK_ALPHA = α`) of the policy's delivery reference (defined below), not the vehicle's current position.
+  2) **Additional ETA filter**: ETA from that delivery reference to pickup $\le$ remaining display TTL. This does not guarantee an actual pickup deadline.
      Code: `eta_min = manhattan(visibility_ref, pickup) / V` and require `eta_min <= ttl * DT`.
-- The default visibility reference is the package delivery target currently used by `_nearest_package()`; if no package target exists, the environment falls back to the vehicle position. FOUR_ZONE explicitly screens from the final delivery point of its current zone route.
+- The default DRL visibility reference is the package delivery target currently used by `_nearest_package()`; if no package target exists, the environment falls back to the vehicle position. HEUR/HEUR_VOR explicitly keep each screening window anchored to its package address, including the retained post-delivery window. FOUR_ZONE explicitly screens from the final delivery point of its current zone route.
 - At most `MAX_VISIBLE_RIDES` **closest** pickups to that visibility reference are exposed each step.
 - Unaccepted rides expire when their TTL reaches 0 (TTL is stored in **steps**; decremented by 1 per step).
-- TTL is the lifetime of an **unaccepted** request. An accepted FOUR_ZONE request is removed from the buffer and remains committed while the current zone's deliveries finish.
+- TTL is the lifetime of an **unaccepted** request. Advance-accepted HEUR/HEUR_VOR and FOUR_ZONE requests are removed from the buffer and remain committed while the associated package or zone finishes; pickup starts afterward.
 
 ### Mapping geometry and alpha to the paper
 The existing physical model is preserved. Write the code's L1 radius as `R_code` and the edge length of the same diamond in the paper as `R_paper`. Then `R_paper = sqrt(2) * R_code` and `alpha_paper = alpha_code / sqrt(2)`, so both conventions give the same pickup radius:
@@ -144,12 +144,15 @@ If `REPORT_UNSCALED=True`, all printed **reward** and rate metrics are **descale
 
 The trainer owns a `RolloutState` across PPO updates. A full rollout batch keeps an unfinished episode's environment, observation/mask, accumulated reward and length; only a real episode ending resets it. Batch boundaries bootstrap from the current policy's next-state value. Completed-episode training statistics can span several policy updates; fixed-policy performance is measured by the separate evaluation environment. Calling `collect_rollout()` without a state still starts a standalone batch.
 
-### Switching Heuristic (Zoning Policy when $N=n$)
-- **Primarily deliver** the nearest package.
-- **Switching window**: after a package delivery (and a one-step **pre-grace** if just about to deliver), open `SWITCH_GRACE_STEPS` decision steps:
-  - If any **visible** ride exists (within $r_{\text{pick}}$ and ETA $\le$ TTL), **accept the nearest pickup**.
-  - After completing that ride, immediately **return to deliver** the nearest package.
-- No chaining: it does not keep accepting rides unless a new window opens around a delivery event.
+### Switching Heuristics (modified paper N=n policies)
+- HEUR and HEUR_VOR share `_baseline_switching`. Both retain the one-step pre-grace trigger (`distance <= V*DT`, currently 0.095) and the intentional post-delivery window (`SWITCH_GRACE_STEPS`, currently 6 decisions / 3 minutes). The extra post-window remains a research extension, not a strict paper reproduction.
+- A window stays anchored to its own package A. Pre-grace screening uses A; after A is delivered, the retained window still uses A, even as an unmatched vehicle moves toward B. Delivering B starts a fresh B window. Merely selecting B as the next delivery target never changes an active A window.
+- In pre-grace, accept a visible request by identity and reserve it immediately, finish the locked package A, then start pickup. TTL no longer applies after acceptance. An accepted final-package reservation must still be served unless the simulation reaches its horizon.
+- In the post-A window, A is already delivered, so an accepted request starts pickup immediately. Without a match, continue toward the nearest remaining package while the window counts down; do not wait in place.
+- Pickup and passenger travel do not open, decrement or refresh grace windows. After dropoff, resume package service; the ordinary pre-grace rule can open a new window near its next delivery. An actual package delivery at a coincident dropoff is still a delivery event.
+- HEUR accepts the pickup closest to the fixed reference, with no destination restriction. Its optional `HEUR_SOFT_PICK_CAP` is retained (currently disabled).
+- HEUR_VOR additionally rejects dropoffs owned by already-delivered L1 Voronoi cells and the current pre-grace package's cell (including coincident packages), since those will be complete before passenger service. The existing visibility/ETA/top-K filters still run first.
+- Both wrappers retain their public signatures and metric tuple. DRL, FOUR_ZONE, rewards, horizon and observation/action dimensions are unchanged. Saved notebook outputs and historical CSVs still describe earlier runs until reevaluation.
 
 ### Pure Delivery
 - Always chooses action `0`.

@@ -1,0 +1,26 @@
+Switching behavioral regression validation, 2026-10-29
+
+Command:
+C:\Users\93541\miniconda3\python.exe archive\switching_update_2026-10-29\test_switching.py -v
+
+Result: 12 tests passed in 2.001 seconds.
+Coverage: 52 notebook/policy/seed subcases across stationary and non-stationary,
+HEUR and HEUR_VOR. Tests load real notebook definitions with NumPy only;
+they do not execute PPO training, notebook plotting, CSV writes, or routing solvers.
+
+PASS test_busy_trip_crossing_near_package_cannot_leave_grace_after_dropoff
+PASS test_delivery_inside_post_window_refreshes_reference_to_the_package_just_completed
+PASS test_horizon_stops_reserved_trip_without_inventing_passenger_travel
+PASS test_last_package_reservation_finishes_ride_and_voronoi_has_no_unvisited_destination
+PASS test_no_screening_before_last_delivery_step
+PASS test_post_window_match_does_not_create_a_new_delivery_commitment_to_next_package
+PASS test_post_window_screens_completed_package_even_when_next_target_has_other_rides
+PASS test_pre_grace_reserves_once_finishes_package_then_picks_up_despite_ttl_expiry
+PASS test_seeded_demand_smoke_and_activity_accounting
+PASS test_unmatched_post_window_keeps_moving_and_expires_without_accepting_late_ride
+PASS test_voronoi_excludes_current_package_before_it_is_completed
+PASS test_voronoi_rejects_already_completed_region_and_selects_next_eligible_ride
+
+The pre-change implementation was also run against these behavioral checks before
+the new helper was installed. It failed the reservation, fixed post-delivery
+reference, prospective Voronoi eligibility, and related state-transition checks.

@@ -1,0 +1,31 @@
+Switching update validation, 2026-10-29
+
+Implementation: HEUR and HEUR_VOR share _baseline_switching in both experiment
+notebooks. Fixed package-window anchors, pre-grace reservations with delivery
+before pickup, prospective Voronoi origin exclusion, and no busy-state window
+bookkeeping. Existing post-delivery window and unmatched movement are retained.
+
+New behavior suite: 12 tests / 52 scenario-policy-seed subcases passed in 2.001 s.
+Includes pre/post windows, expiry and refresh, request identity, TTL commitment,
+busy travel, destination cells, last-package/horizon behavior, random demand,
+activity accounting, and restoration of the environment's delivery method.
+See test_switching.py and validation_switching.txt.
+
+Existing regression suite: all 53 tests passed in 44.185 s with the installed
+Miniconda runtime, including actual CPU PPO, evaluation, checkpoints/resume,
+OR-Tools and FOUR_ZONE integration. The archived explicit AST loader now includes
+the new shared helper. See validation_legacy.txt.
+The initial sandboxed run encountered Windows temporary-directory permissions;
+the successful rerun used approved execution outside that restriction.
+
+Structural checks: only the baseline-policy source cell changes in each
+experiment notebook (stationary cell 6 / nonstationary cell 7, zero-based).
+All other definitions, saved cell outputs/counts, and metadata are preserved.
+Shared baseline source SHA-256:
+ca41c39d2b0cc985cec50c3b815863e94f7b41e6dee5100001e3f6fb54b6c07a
+See structural_validation.json. The installer also checks unchanged notebook
+fields when applying to the active Research_project copy.
+
+No full PPO training or parameter sweep was run. Historical CSVs, figures, logs,
+and checkpoints remain historical; they are not results of the new heuristics.
+Use a new evaluation/run identity for corrected baseline comparisons.

@@ -35,7 +35,7 @@ def training_definitions(filename):
               Path=Path, json=json)
     definitions(filename, {"ActorCritic", "collect_rollout", "ppo_update", "make_minibatches",
                            "_make_eval_env_from", "evaluate_all", "run_episode",
-                           "baseline_nearby_rule", "baseline_nearby_rule_voronoi",
+                           "_baseline_switching", "baseline_nearby_rule", "baseline_nearby_rule_voronoi",
                            "train_policy_brief", "append_training_log", "run_param_sweep"}, ns)
     _, tree = notebook_tree(filename)
     for node in tree.body:

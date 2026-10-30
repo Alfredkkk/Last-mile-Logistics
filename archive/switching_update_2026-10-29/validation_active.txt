@@ -1,0 +1,17 @@
+test_busy_trip_crossing_near_package_cannot_leave_grace_after_dropoff (__main__.SwitchingTests.test_busy_trip_crossing_near_package_cannot_leave_grace_after_dropoff) ... ok
+test_delivery_inside_post_window_refreshes_reference_to_the_package_just_completed (__main__.SwitchingTests.test_delivery_inside_post_window_refreshes_reference_to_the_package_just_completed) ... ok
+test_horizon_stops_reserved_trip_without_inventing_passenger_travel (__main__.SwitchingTests.test_horizon_stops_reserved_trip_without_inventing_passenger_travel) ... ok
+test_last_package_reservation_finishes_ride_and_voronoi_has_no_unvisited_destination (__main__.SwitchingTests.test_last_package_reservation_finishes_ride_and_voronoi_has_no_unvisited_destination) ... ok
+test_no_screening_before_last_delivery_step (__main__.SwitchingTests.test_no_screening_before_last_delivery_step) ... ok
+test_post_window_match_does_not_create_a_new_delivery_commitment_to_next_package (__main__.SwitchingTests.test_post_window_match_does_not_create_a_new_delivery_commitment_to_next_package) ... ok
+test_post_window_screens_completed_package_even_when_next_target_has_other_rides (__main__.SwitchingTests.test_post_window_screens_completed_package_even_when_next_target_has_other_rides) ... ok
+test_pre_grace_reserves_once_finishes_package_then_picks_up_despite_ttl_expiry (__main__.SwitchingTests.test_pre_grace_reserves_once_finishes_package_then_picks_up_despite_ttl_expiry) ... ok
+test_seeded_demand_smoke_and_activity_accounting (__main__.SwitchingTests.test_seeded_demand_smoke_and_activity_accounting) ... ok
+test_unmatched_post_window_keeps_moving_and_expires_without_accepting_late_ride (__main__.SwitchingTests.test_unmatched_post_window_keeps_moving_and_expires_without_accepting_late_ride) ... ok
+test_voronoi_excludes_current_package_before_it_is_completed (__main__.SwitchingTests.test_voronoi_excludes_current_package_before_it_is_completed) ... ok
+test_voronoi_rejects_already_completed_region_and_selects_next_eligible_ride (__main__.SwitchingTests.test_voronoi_rejects_already_completed_region_and_selects_next_eligible_ride) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.739s
+
+OK
